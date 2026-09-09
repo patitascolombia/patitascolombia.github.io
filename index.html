@@ -1,319 +1,996 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-<head><meta name="google-site-verification" content="Y-8r-7GrklWtcXgaLlccoVPvkU_b983tpICZ3wyrzCI" />
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Huellitas Medellín: encuentra lugares pet friendly y gestiona tu membresía.">
+<meta name="robots" content="index, follow">
+<title>Huellitas Medellín | Plataforma Pet Friendly</title>
 
-  <title>Huellitas Medellín | Lugares Pet Friendly</title>
-
-  <meta name="description" content="Huellitas Medellín te ayuda a encontrar lugares pet friendly donde puedes disfrutar con tu perro.">
-  <meta name="robots" content="index, follow">
-
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: Arial, sans-serif;
-      background: #f4faf6;
-      color: #173b2a;
-    }
-
-    header {
-      background: #1f7a4d;
-      color: white;
-      padding: 18px 7%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .logo {
-      font-size: 24px;
-      font-weight: bold;
-    }
-
-    nav a {
-      color: white;
-      text-decoration: none;
-      margin-left: 18px;
-      font-weight: bold;
-    }
-
-    .hero {
-      padding: 70px 7%;
-      text-align: center;
-      background: white;
-    }
-
-    .hero h1 {
-      font-size: 42px;
-      margin-bottom: 18px;
-      color: #17613d;
-    }
-
-    .hero p {
-      font-size: 19px;
-      max-width: 700px;
-      margin: auto;
-      line-height: 1.6;
-    }
-
-    .buttons {
-      margin-top: 28px;
-    }
-
-    button {
-      border: none;
-      padding: 14px 22px;
-      border-radius: 10px;
-      background: #1f7a4d;
-      color: white;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-      margin: 5px;
-    }
-
-    .secondary {
-      background: #dff1e7;
-      color: #17613d;
-    }
-
-    section {
-      padding: 55px 7%;
-    }
-
-    section h2 {
-      text-align: center;
-      margin-bottom: 30px;
-      font-size: 30px;
-    }
-
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-      gap: 20px;
-      max-width: 1000px;
-      margin: auto;
-    }
-
-    .card {
-      background: white;
-      padding: 25px;
-      border-radius: 16px;
-      box-shadow: 0 4px 15px rgba(0,0,0,.08);
-    }
-
-    .card h3 {
-      margin-bottom: 12px;
-      color: #1f7a4d;
-    }
-
-    .card p {
-      line-height: 1.5;
-    }
-
-    .plans {
-      background: #e8f5ed;
-    }
-
-    .price {
-      font-size: 27px;
-      font-weight: bold;
-      margin: 15px 0;
-    }
-
-    .map {
-      max-width: 1000px;
-      margin: auto;
-      background: #d9e9df;
-      min-height: 300px;
-      border-radius: 18px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 30px;
-    }
-
-    footer {
-      background: #173b2a;
-      color: white;
-      text-align: center;
-      padding: 30px;
-    }
-
-    @media(max-width:600px) {
-      .hero h1 {
-        font-size: 32px;
-      }
-
-      nav a {
-        margin-left: 8px;
-        font-size: 13px;
-      }
-    }
-  </style>
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#f5faf7;
+  color:#173b2a
+}
+header{
+  background:#198754;
+  color:white;
+  padding:16px 6%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  position:sticky;
+  top:0;
+  z-index:5
+}
+.logo{
+  font-size:24px;
+  font-weight:800
+}
+nav{
+  display:flex;
+  gap:6px;
+  flex-wrap:wrap
+}
+button{
+  border:0;
+  border-radius:9px;
+  padding:11px 15px;
+  font-weight:700;
+  cursor:pointer
+}
+nav button{
+  background:transparent;
+  color:white
+}
+.btn{
+  background:#198754;
+  color:white
+}
+.alt{
+  background:#dff2e8;
+  color:#126b43
+}
+.dark{
+  background:#12372a;
+  color:white
+}
+main{
+  max-width:1100px;
+  margin:auto;
+  padding:28px 16px
+}
+.hero{
+  background:white;
+  text-align:center;
+  padding:55px 18px;
+  border-radius:0 0 20px 20px
+}
+.hero h1{
+  font-size:clamp(34px,7vw,58px);
+  color:#126b43;
+  margin:10px auto 15px
+}
+.hero p{
+  max-width:700px;
+  margin:auto;
+  line-height:1.6;
+  font-size:18px;
+  color:#617168
+}
+.actions{
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top:22px
+}
+section{
+  margin-bottom:34px
+}
+.title{
+  color:#126b43;
+  font-size:30px
+}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:16px
+}
+.card{
+  background:white;
+  border:1px solid #d8e9df;
+  border-radius:15px;
+  padding:20px;
+  box-shadow:0 8px 25px #174c3510
+}
+.card h3{
+  color:#126b43
+}
+.muted{
+  color:#65736c;
+  line-height:1.5
+}
+.badge{
+  display:inline-block;
+  background:#e0f4e9;
+  color:#167447;
+  border-radius:20px;
+  padding:6px 10px;
+  font-size:12px;
+  font-weight:800
+}
+.price{
+  font-size:28px;
+  font-weight:900;
+  color:#126b43;
+  margin:10px 0
+}
+.view{
+  display:none
+}
+.view.active{
+  display:block
+}
+.map{
+  height:300px;
+  border-radius:15px;
+  background:linear-gradient(135deg,#dcefe5,#eef8f2);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  color:#126b43
+}
+table{
+  width:100%;
+  border-collapse:collapse;
+  background:white;
+  min-width:600px
+}
+th,td{
+  padding:13px;
+  text-align:left;
+  border-bottom:1px solid #dce9e2
+}
+th{
+  background:#edf7f1
+}
+.table{
+  overflow:auto;
+  border-radius:15px
+}
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:#0008;
+  align-items:center;
+  justify-content:center;
+  padding:18px;
+  z-index:10
+}
+.modal.show{
+  display:flex
+}
+.box{
+  background:white;
+  padding:23px;
+  border-radius:15px;
+  max-width:500px;
+  width:100%
+}
+.close{
+  float:right;
+  background:#edf4f0
+}
+input,select{
+  width:100%;
+  padding:11px;
+  margin:6px 0 12px;
+  border:1px solid #cbdcd3;
+  border-radius:8px
+}
+footer{
+  background:#12372a;
+  color:white;
+  text-align:center;
+  padding:28px;
+  margin-top:35px
+}
+@media(max-width:600px){
+  header{
+    flex-direction:column;
+    align-items:flex-start
+  }
+}
+</style>
 </head>
 
 <body>
 
 <header>
-  <div class="logo">🐾 Huellitas Medellín</div>
 
-  <nav>
-    <a href="#lugares">Lugares</a>
-    <a href="#planes">Planes</a>
-    <a href="#login">Iniciar sesión</a>
-  </nav>
+<div class="logo">
+🐾 Huellitas Medellín
+</div>
+
+<nav>
+<button onclick="go('inicio')">Inicio</button>
+<button onclick="go('lugares')">Lugares</button>
+<button onclick="go('planes')">Planes</button>
+<button onclick="go('usuario')">Mi cuenta</button>
+<button onclick="go('admin')">Administrador</button>
+</nav>
+
 </header>
 
-<section class="hero">
-  <h1>Disfruta Medellín junto a tu mejor amigo</h1>
 
-  <p>
-    Encuentra establecimientos pet friendly, descubre nuevos lugares
-    y disfruta experiencias junto a tu perro.
-  </p>
+<div id="inicio" class="view active">
 
-  <div class="buttons">
-    <button onclick="location.href='#lugares'">
-      Explorar lugares
-    </button>
+<div class="hero">
 
-    <button class="secondary" onclick="location.href='#planes'">
-      Ver membresías
-    </button>
-  </div>
-</section>
+<h1>
+Disfruta Medellín junto a tu mejor amigo
+</h1>
 
-<section id="lugares">
-  <h2>Lugares pet friendly</h2>
+<p>
+Encuentra lugares pet friendly, guarda favoritos y administra
+la membresía de tu mascota desde un solo lugar.
+</p>
 
-  <div class="cards">
+<div class="actions">
 
-    <div class="card">
-      <h3>Centro Comercial Santafé</h3>
-      <p>
-        Espacios pet friendly para disfrutar con tu mascota,
-        respetando las normas de cada zona.
-      </p>
-      <button>Ver lugar</button>
-    </div>
+<button class="btn" onclick="go('lugares')">
+Explorar lugares
+</button>
 
-    <div class="card">
-      <h3>Los Molinos</h3>
-      <p>
-        Centro comercial con espacios destinados para visitantes
-        que vienen acompañados de sus mascotas.
-      </p>
-      <button>Ver lugar</button>
-    </div>
+<button class="alt" onclick="go('planes')">
+Ver membresías
+</button>
 
-    <div class="card">
-      <h3>Pane e Pomodoro</h3>
-      <p>
-        Restaurante con espacio pet friendly para compartir
-        una experiencia gastronómica con tu perro.
-      </p>
-      <button>Ver lugar</button>
-    </div>
+</div>
 
-  </div>
-</section>
+</div>
 
-<section>
-  <h2>Mapa de Huellitas</h2>
 
-  <div class="map">
-    <div>
-      <h3>🗺️ Mapa interactivo</h3>
-      <p>
-        Próximamente podrás encontrar los establecimientos
-        pet friendly de Medellín directamente en el mapa.
-      </p>
-    </div>
-  </div>
-</section>
+<main>
 
-<section class="plans" id="planes">
-  <h2>Planes Huellitas</h2>
+<h2 class="title">
+¿Cómo funciona?
+</h2>
 
-  <div class="cards">
+<div class="grid">
 
-    <div class="card">
-      <h3>Plan mensual</h3>
+<div class="card">
+<h3>1. Encuentra</h3>
+<p class="muted">
+Consulta establecimientos afiliados y sus reglas para mascotas.
+</p>
+</div>
 
-      <div class="price">$20.000 COP / mes</div>
+<div class="card">
+<h3>2. Registra</h3>
+<p class="muted">
+Ten el perfil digital de tu perro y tu código de membresía.
+</p>
+</div>
 
-      <p>
-        Primer mes GRATIS.<br><br>
-        Segundo y tercer mes con 50% de descuento:
-        $10.000 COP cada uno.<br><br>
-        Desde el cuarto mes: $20.000 COP.
-      </p>
+<div class="card">
+<h3>3. Disfruta</h3>
+<p class="muted">
+Usa tus beneficios y consulta la cobertura según la póliza.
+</p>
+</div>
 
-      <button>Elegir plan</button>
-    </div>
+</div>
 
-    <div class="card">
-      <h3>Plan anual</h3>
+</main>
 
-      <div class="price">$180.000 COP / año</div>
+</div>
 
-      <p>
-        Precio normal: $240.000 COP.<br>
-        Ahorras $60.000 COP.
-      </p>
 
-      <br>
+<div id="lugares" class="view">
 
-      <p>
-        Incluye acceso a beneficios de Huellitas,
-        perfil digital y mapa de lugares pet friendly,
-        sujeto a las condiciones de cada establecimiento
-        y de la póliza de seguro.
-      </p>
+<main>
 
-      <button>Elegir plan</button>
-    </div>
+<h2 class="title">
+Lugares pet friendly
+</h2>
 
-  </div>
-</section>
+<div id="places" class="grid"></div>
 
-<section id="login">
-  <h2>Únete a Huellitas Medellín</h2>
+<div class="map" style="margin-top:18px">
 
-  <div class="card" style="max-width:500px;margin:auto;text-align:center;">
-    <h3>¿Ya tienes una cuenta?</h3>
+<div>
 
-    <p style="margin:15px 0;">
-      Inicia sesión para consultar tu perfil,
-      membresía, favoritos y lugares cercanos.
-    </p>
+<h2>📍 Mapa de Medellín</h2>
 
-    <button onclick="alert('Inicio de sesión: próximamente')">
-      Iniciar sesión
-    </button>
+<p>
+En la versión con base de datos, aquí aparecerán los lugares
+por ubicación.
+</p>
 
-    <button class="secondary"
-      onclick="alert('Registro de usuario: próximamente')">
-      Crear cuenta
-    </button>
-  </div>
-</section>
+</div>
+
+</div>
+
+</main>
+
+</div>
+
+
+<div id="planes" class="view">
+
+<main>
+
+<h2 class="title">
+Membresías
+</h2>
+
+<div class="grid">
+
+<div class="card">
+
+<span class="badge">
+MENSUAL
+</span>
+
+<h3>
+Huellitas Mensual
+</h3>
+
+<div class="price">
+$20.000/mes
+</div>
+
+<p class="muted">
+
+1 mes GRATIS + 2 meses al 50%
+($10.000/mes).
+
+Desde el mes 4:
+$20.000/mes.
+
+</p>
+
+<button class="btn" onclick="pay('Mensual')">
+Elegir plan
+</button>
+
+</div>
+
+
+<div class="card">
+
+<span class="badge">
+RECOMENDADO
+</span>
+
+<h3>
+Huellitas Anual
+</h3>
+
+<div class="price">
+$180.000/año
+</div>
+
+<p class="muted">
+
+<s>$240.000</s>.
+
+Ahorras $60.000.
+
+</p>
+
+<button class="btn" onclick="pay('Anual')">
+Elegir plan
+</button>
+
+</div>
+
+</div>
+
+<p class="muted" style="margin-top:20px">
+
+Los pagos y la cobertura de daños son simulaciones académicas;
+un servicio real requeriría una pasarela y una póliza con
+condiciones.
+
+</p>
+
+</main>
+
+</div>
+
+
+<div id="usuario" class="view">
+
+<main>
+
+<span class="badge">
+MEMBRESÍA ACTIVA
+</span>
+
+<h2 class="title">
+Mi cuenta
+</h2>
+
+<div class="grid">
+
+<div class="card">
+
+<h3>
+🐶 Max
+</h3>
+
+<p class="muted">
+Golden Retriever · 3 años
+</p>
+
+<p>
+<b>Código:</b>
+HUE-482731
+</p>
+
+<p>
+<b>Seguro:</b>
+<span style="color:#198754">
+Activo*
+</span>
+</p>
+
+<button class="btn"
+onclick="openM('dog')">
+Editar perfil
+</button>
+
+</div>
+
+
+<div class="card">
+
+<h3>
+Mi suscripción
+</h3>
+
+<p>
+Huellitas Anual
+</p>
+
+<div class="price">
+$180.000/año
+</div>
+
+<p class="muted">
+
+Normal: $240.000
+
+<br>
+
+Ahorro: $60.000
+
+<br>
+
+Renovación: 09/09/2027
+
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h3>
+Beneficios
+</h3>
+
+<p>
+✓ Lugares afiliados
+<br>
+✓ Perfil digital
+<br>
+✓ Mapa y favoritos
+<br>
+✓ Cobertura según póliza
+</p>
+
+</div>
+
+</div>
+
+</main>
+
+</div>
+
+
+<div id="admin" class="view">
+
+<main>
+
+<span class="badge">
+ADMINISTRADOR
+</span>
+
+<h2 class="title">
+Panel de control
+</h2>
+
+<div class="grid">
+
+<div class="card">
+
+<small>
+Usuarios
+</small>
+
+<div class="price">
+128
+</div>
+
+</div>
+
+
+<div class="card">
+
+<small>
+Membresías activas
+</small>
+
+<div class="price">
+96
+</div>
+
+</div>
+
+
+<div class="card">
+
+<small>
+Establecimientos
+</small>
+
+<div class="price" id="count">
+24
+</div>
+
+</div>
+
+
+<div class="card">
+
+<small>
+Solicitudes
+</small>
+
+<div class="price">
+5
+</div>
+
+</div>
+
+</div>
+
+
+<div class="actions"
+style="justify-content:flex-start">
+
+<button class="btn"
+onclick="openM('add')">
+
++ Agregar establecimiento
+
+</button>
+
+</div>
+
+
+<h2 class="title">
+Establecimientos
+</h2>
+
+<div class="table">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>
+Nombre
+</th>
+
+<th>
+Zona
+</th>
+
+<th>
+Estado
+</th>
+
+<th>
+Acción
+</th>
+
+</tr>
+
+</thead>
+
+<tbody id="adminRows">
+</tbody>
+
+</table>
+
+</div>
+
+
+<h2 class="title"
+style="margin-top:30px">
+
+Solicitud pendiente
+
+</h2>
+
+
+<div class="card">
+
+<h3>
+Huellas & Sabor
+</h3>
+
+<p class="muted">
+
+Solicitud para aparecer como establecimiento afiliado.
+
+</p>
+
+<button class="btn"
+onclick="this.parentElement.innerHTML='<h3>Solicitud aprobada</h3><p>El establecimiento quedó aprobado en la simulación.</p>'">
+
+Aprobar
+
+</button>
+
+</div>
+
+</main>
+
+</div>
+
+
+<div id="dog" class="modal">
+
+<div class="box">
+
+<button class="close"
+onclick="closeM('dog')">
+
+Cerrar
+
+</button>
+
+<h2>
+Perfil de Max
+</h2>
+
+<label>
+Nombre
+</label>
+
+<input value="Max">
+
+<label>
+Raza
+</label>
+
+<input value="Golden Retriever">
+
+<label>
+Edad
+</label>
+
+<input value="3 años">
+
+<button class="btn"
+onclick="closeM('dog');alert('Perfil actualizado en la simulación.')">
+
+Guardar
+
+</button>
+
+</div>
+
+</div>
+
+
+<div id="add" class="modal">
+
+<div class="box">
+
+<button class="close"
+onclick="closeM('add')">
+
+Cerrar
+
+</button>
+
+<h2>
+Nuevo establecimiento
+</h2>
+
+<label>
+Nombre
+</label>
+
+<input
+id="newName"
+placeholder="Nombre">
+
+<label>
+Zona
+</label>
+
+<input
+id="newZone"
+placeholder="Zona de Medellín">
+
+<button class="btn"
+onclick="addPlace()">
+
+Agregar
+
+</button>
+
+</div>
+
+</div>
+
 
 <footer>
-  <p><strong>🐾 Huellitas Medellín</strong></p>
-  <p>Una plataforma para disfrutar Medellín con tu mejor amigo.</p>
-  <p style="margin-top:10px;">
-    Proyecto académico — versión demostrativa
-  </p>
+
+© 2026 Huellitas Medellín · Prototipo académico
+
 </footer>
+
+
+<script>
+
+const base = [
+
+[
+"Centro Comercial Santafé",
+"El Poblado",
+"Centro comercial"
+],
+
+[
+"Centro Comercial Los Molinos",
+"Belén",
+"Centro comercial"
+],
+
+[
+"Pane e Pomodoro",
+"Laureles",
+"Restaurante"
+],
+
+[
+"Centro Comercial El Diamante",
+"La América",
+"Centro comercial"
+]
+
+];
+
+let extra = [];
+
+
+function go(id){
+
+document
+.querySelectorAll('.view')
+.forEach(x =>
+x.classList.remove('active')
+);
+
+document
+.getElementById(id)
+.classList.add('active');
+
+if(id === 'lugares'){
+render();
+}
+
+if(id === 'admin'){
+admin();
+}
+
+scrollTo(0,0);
+
+}
+
+
+function render(){
+
+document
+.getElementById('places')
+.innerHTML =
+
+[...base,...extra]
+
+.map(p => `
+
+<div class="card">
+
+<span class="badge">
+${p[2]}
+</span>
+
+<h3>
+${p[0]}
+</h3>
+
+<p class="muted">
+
+Zona:
+${p[1]}
+
+<br>
+
+Consulta las reglas del establecimiento
+para mascotas.
+
+</p>
+
+<button class="btn"
+onclick="alert('Lugar seleccionado: ${p[0]}')">
+
+Ver lugar
+
+</button>
+
+</div>
+
+`)
+
+.join('');
+
+}
+
+
+function admin(){
+
+document
+.getElementById('count')
+.textContent = 24 + extra.length;
+
+document
+.getElementById('adminRows')
+.innerHTML =
+
+[...base,...extra]
+
+.map(p => `
+
+<tr>
+
+<td>
+${p[0]}
+</td>
+
+<td>
+${p[1]}
+</td>
+
+<td>
+Activo
+</td>
+
+<td>
+
+<button
+onclick="alert('Gestión del establecimiento en la versión con base de datos.')">
+
+Gestionar
+
+</button>
+
+</td>
+
+</tr>
+
+`)
+
+.join('');
+
+}
+
+
+function openM(id){
+
+document
+.getElementById(id)
+.classList.add('show');
+
+}
+
+
+function closeM(id){
+
+document
+.getElementById(id)
+.classList.remove('show');
+
+}
+
+
+function addPlace(){
+
+let n =
+document
+.getElementById('newName')
+.value
+.trim();
+
+let z =
+document
+.getElementById('newZone')
+.value
+.trim();
+
+if(!n || !z){
+
+alert('Completa los campos');
+
+return;
+
+}
+
+extra.push([
+n,
+z,
+'Nuevo'
+]);
+
+closeM('add');
+
+admin();
+
+alert(
+'Establecimiento agregado en la simulación.'
+);
+
+}
+
+
+function pay(plan){
+
+if(plan === 'Mensual'){
+
+alert(
+'Plan mensual: 1 mes GRATIS + 2 meses al 50%.\\n\\nPago SIMULADO, sin cobro real.'
+);
+
+}else{
+
+alert(
+'Plan anual: $240.000 → $180.000. Ahorras $60.000.\\n\\nPago SIMULADO, sin cobro real.'
+);
+
+}
+
+}
+
+
+render();
+
+</script>
 
 </body>
 </html>
