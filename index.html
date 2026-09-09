@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Huellitas Medellín | Lugares Pet Friendly</title>
+
+  <meta name="description" content="Huellitas Medellín te ayuda a encontrar lugares pet friendly donde puedes disfrutar con tu perro.">
+  <meta name="robots" content="index, follow">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4faf6;
+      color: #173b2a;
+    }
+
+    header {
+      background: #1f7a4d;
+      color: white;
+      padding: 18px 7%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 18px;
+      font-weight: bold;
+    }
+
+    .hero {
+      padding: 70px 7%;
+      text-align: center;
+      background: white;
+    }
+
+    .hero h1 {
+      font-size: 42px;
+      margin-bottom: 18px;
+      color: #17613d;
+    }
+
+    .hero p {
+      font-size: 19px;
+      max-width: 700px;
+      margin: auto;
+      line-height: 1.6;
+    }
+
+    .buttons {
+      margin-top: 28px;
+    }
+
+    button {
+      border: none;
+      padding: 14px 22px;
+      border-radius: 10px;
+      background: #1f7a4d;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      margin: 5px;
+    }
+
+    .secondary {
+      background: #dff1e7;
+      color: #17613d;
+    }
+
+    section {
+      padding: 55px 7%;
+    }
+
+    section h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 30px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 16px;
+      box-shadow: 0 4px 15px rgba(0,0,0,.08);
+    }
+
+    .card h3 {
+      margin-bottom: 12px;
+      color: #1f7a4d;
+    }
+
+    .card p {
+      line-height: 1.5;
+    }
+
+    .plans {
+      background: #e8f5ed;
+    }
+
+    .price {
+      font-size: 27px;
+      font-weight: bold;
+      margin: 15px 0;
+    }
+
+    .map {
+      max-width: 1000px;
+      margin: auto;
+      background: #d9e9df;
+      min-height: 300px;
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 30px;
+    }
+
+    footer {
+      background: #173b2a;
+      color: white;
+      text-align: center;
+      padding: 30px;
+    }
+
+    @media(max-width:600px) {
+      .hero h1 {
+        font-size: 32px;
+      }
+
+      nav a {
+        margin-left: 8px;
+        font-size: 13px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">🐾 Huellitas Medellín</div>
+
+  <nav>
+    <a href="#lugares">Lugares</a>
+    <a href="#planes">Planes</a>
+    <a href="#login">Iniciar sesión</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <h1>Disfruta Medellín junto a tu mejor amigo</h1>
+
+  <p>
+    Encuentra establecimientos pet friendly, descubre nuevos lugares
+    y disfruta experiencias junto a tu perro.
+  </p>
+
+  <div class="buttons">
+    <button onclick="location.href='#lugares'">
+      Explorar lugares
+    </button>
+
+    <button class="secondary" onclick="location.href='#planes'">
+      Ver membresías
+    </button>
+  </div>
+</section>
+
+<section id="lugares">
+  <h2>Lugares pet friendly</h2>
+
+  <div class="cards">
+
+    <div class="card">
+      <h3>Centro Comercial Santafé</h3>
+      <p>
+        Espacios pet friendly para disfrutar con tu mascota,
+        respetando las normas de cada zona.
+      </p>
+      <button>Ver lugar</button>
+    </div>
+
+    <div class="card">
+      <h3>Los Molinos</h3>
+      <p>
+        Centro comercial con espacios destinados para visitantes
+        que vienen acompañados de sus mascotas.
+      </p>
+      <button>Ver lugar</button>
+    </div>
+
+    <div class="card">
+      <h3>Pane e Pomodoro</h3>
+      <p>
+        Restaurante con espacio pet friendly para compartir
+        una experiencia gastronómica con tu perro.
+      </p>
+      <button>Ver lugar</button>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2>Mapa de Huellitas</h2>
+
+  <div class="map">
+    <div>
+      <h3>🗺️ Mapa interactivo</h3>
+      <p>
+        Próximamente podrás encontrar los establecimientos
+        pet friendly de Medellín directamente en el mapa.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="plans" id="planes">
+  <h2>Planes Huellitas</h2>
+
+  <div class="cards">
+
+    <div class="card">
+      <h3>Plan mensual</h3>
+
+      <div class="price">$20.000 COP / mes</div>
+
+      <p>
+        Primer mes GRATIS.<br><br>
+        Segundo y tercer mes con 50% de descuento:
+        $10.000 COP cada uno.<br><br>
+        Desde el cuarto mes: $20.000 COP.
+      </p>
+
+      <button>Elegir plan</button>
+    </div>
+
+    <div class="card">
+      <h3>Plan anual</h3>
+
+      <div class="price">$180.000 COP / año</div>
+
+      <p>
+        Precio normal: $240.000 COP.<br>
+        Ahorras $60.000 COP.
+      </p>
+
+      <br>
+
+      <p>
+        Incluye acceso a beneficios de Huellitas,
+        perfil digital y mapa de lugares pet friendly,
+        sujeto a las condiciones de cada establecimiento
+        y de la póliza de seguro.
+      </p>
+
+      <button>Elegir plan</button>
+    </div>
+
+  </div>
+</section>
+
+<section id="login">
+  <h2>Únete a Huellitas Medellín</h2>
+
+  <div class="card" style="max-width:500px;margin:auto;text-align:center;">
+    <h3>¿Ya tienes una cuenta?</h3>
+
+    <p style="margin:15px 0;">
+      Inicia sesión para consultar tu perfil,
+      membresía, favoritos y lugares cercanos.
+    </p>
+
+    <button onclick="alert('Inicio de sesión: próximamente')">
+      Iniciar sesión
+    </button>
+
+    <button class="secondary"
+      onclick="alert('Registro de usuario: próximamente')">
+      Crear cuenta
+    </button>
+  </div>
+</section>
+
+<footer>
+  <p><strong>🐾 Huellitas Medellín</strong></p>
+  <p>Una plataforma para disfrutar Medellín con tu mejor amigo.</p>
+  <p style="margin-top:10px;">
+    Proyecto académico — versión demostrativa
+  </p>
+</footer>
+
+</body>
+</html>
