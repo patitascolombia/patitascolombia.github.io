@@ -3,340 +3,1248 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Huellitas Medellín</title>
+
+<title>Patitas Colombia</title>
+
 <link rel="preconnect" href="https://unpkg.com">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
 <style>
 :root{
-  --green:#2f7d5a; --light:#f4faf6; --dark:#173b2b; --gold:#f2b84b;
-  --text:#203027; --muted:#68756d; --white:#fff; --border:#dfe9e2;
+  --green:#2f7d5a;
+  --light:#f4faf6;
+  --dark:#173b2b;
+  --gold:#f2b84b;
+  --text:#203027;
+  --muted:#68756d;
+  --white:#fff;
+  --border:#dfe9e2;
 }
-*{box-sizing:border-box}
-body{margin:0;font-family:Inter,Arial,sans-serif;color:var(--text);background:var(--light)}
-header{position:sticky;top:0;z-index:1000;background:rgba(255,255,255,.96);border-bottom:1px solid var(--border)}
-.nav{max-width:1180px;margin:auto;display:flex;align-items:center;justify-content:space-between;padding:14px 20px}
-.logo{display:flex;align-items:center;gap:10px;font-weight:900;color:var(--dark);font-size:22px}
-.paw{font-size:28px}
-nav a{color:var(--text);text-decoration:none;margin-left:20px;font-weight:700;font-size:14px}
-.btn{border:0;border-radius:12px;padding:12px 17px;font-weight:800;cursor:pointer}
-.btn-primary{background:var(--green);color:white}
-.btn-outline{background:white;color:var(--green);border:1px solid var(--green)}
-.hero{max-width:1180px;margin:auto;padding:62px 20px 35px;display:grid;grid-template-columns:1.1fr .9fr;gap:35px;align-items:center}
-h1{font-size:clamp(38px,6vw,68px);line-height:.98;margin:0 0 20px;color:var(--dark)}
-.hero p{font-size:18px;line-height:1.6;color:var(--muted);max-width:620px}
-.hero-card{background:white;border:1px solid var(--border);border-radius:28px;padding:25px;box-shadow:0 15px 45px rgba(31,74,51,.09)}
-.paw-art{height:260px;border-radius:22px;background:linear-gradient(145deg,#e8f5ec,#fff7df);display:flex;align-items:center;justify-content:center;font-size:130px}
-section{max-width:1180px;margin:auto;padding:45px 20px}
-.section-title{font-size:32px;color:var(--dark);margin:0 0 8px}
-.section-sub{color:var(--muted);margin-top:0}
-.map-wrap{background:white;border:1px solid var(--border);border-radius:22px;overflow:hidden}
-#map{height:500px}
-.legend{padding:13px 16px;border-top:1px solid var(--border);font-size:13px;color:var(--muted)}
-.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:20px}
-.card{background:white;border:1px solid var(--border);border-radius:18px;padding:20px}
-.card h3{margin:8px 0;color:var(--dark)}
-.badge{display:inline-block;background:#e5f5eb;color:#246246;border-radius:999px;padding:5px 9px;font-size:12px;font-weight:800}
-.card p{color:var(--muted);line-height:1.5}
-.license{display:grid;grid-template-columns:1fr 1fr;gap:25px;align-items:stretch}
-.price-card{background:var(--dark);color:white;border-radius:24px;padding:30px}
-.price{font-size:42px;font-weight:900;margin:12px 0}
-ul{padding-left:20px;line-height:1.9}
-.form-card{background:white;border:1px solid var(--border);border-radius:24px;padding:28px}
-input{width:100%;padding:13px;border:1px solid var(--border);border-radius:10px;margin:7px 0 14px;font-size:15px}
-footer{background:var(--dark);color:white;padding:35px 20px;text-align:center;margin-top:30px}
-.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:3000;align-items:center;justify-content:center;padding:20px}
-.modal-box{background:white;border-radius:20px;padding:28px;max-width:420px;width:100%}
-.close{float:right;background:none;border:0;font-size:25px;cursor:pointer}
-.notice{font-size:12px;color:var(--muted);line-height:1.4}
+
+*{
+  box-sizing:border-box
+}
+
+body{
+  margin:0;
+  font-family:Inter,Arial,sans-serif;
+  color:var(--text);
+  background:var(--light)
+}
+
+header{
+  position:sticky;
+  top:0;
+  z-index:1000;
+  background:rgba(255,255,255,.96);
+  border-bottom:1px solid var(--border)
+}
+
+.nav{
+  max-width:1180px;
+  margin:auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:14px 20px
+}
+
+.logo{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-weight:900;
+  color:var(--dark);
+  font-size:22px
+}
+
+.paw{
+  font-size:28px
+}
+
+nav a{
+  color:var(--text);
+  text-decoration:none;
+  margin-left:20px;
+  font-weight:700;
+  font-size:14px
+}
+
+.btn{
+  border:0;
+  border-radius:12px;
+  padding:12px 17px;
+  font-weight:800;
+  cursor:pointer
+}
+
+.btn-primary{
+  background:var(--green);
+  color:white
+}
+
+.btn-outline{
+  background:white;
+  color:var(--green);
+  border:1px solid var(--green)
+}
+
+.hero{
+  max-width:1180px;
+  margin:auto;
+  padding:62px 20px 35px;
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  gap:35px;
+  align-items:center
+}
+
+h1{
+  font-size:clamp(38px,6vw,68px);
+  line-height:.98;
+  margin:0 0 20px;
+  color:var(--dark)
+}
+
+.hero p{
+  font-size:18px;
+  line-height:1.6;
+  color:var(--muted);
+  max-width:620px
+}
+
+.hero-card{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:28px;
+  padding:25px;
+  box-shadow:0 15px 45px rgba(31,74,51,.09)
+}
+
+.paw-art{
+  height:260px;
+  border-radius:22px;
+  background:linear-gradient(145deg,#e8f5ec,#fff7df);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:130px
+}
+
+section{
+  max-width:1180px;
+  margin:auto;
+  padding:45px 20px
+}
+
+.section-title{
+  font-size:32px;
+  color:var(--dark);
+  margin:0 0 8px
+}
+
+.section-sub{
+  color:var(--muted);
+  margin-top:0
+}
+
+.map-wrap{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:22px;
+  overflow:hidden
+}
+
+#map{
+  height:500px
+}
+
+.legend{
+  padding:13px 16px;
+  border-top:1px solid var(--border);
+  font-size:13px;
+  color:var(--muted)
+}
+
+.cards{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+  margin-top:20px
+}
+
+.card{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:20px
+}
+
+.card h3{
+  margin:8px 0;
+  color:var(--dark)
+}
+
+.badge{
+  display:inline-block;
+  background:#e5f5eb;
+  color:#246246;
+  border-radius:999px;
+  padding:5px 9px;
+  font-size:12px;
+  font-weight:800
+}
+
+.card p{
+  color:var(--muted);
+  line-height:1.5
+}
+
+.license{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:25px;
+  align-items:stretch
+}
+
+.price-card{
+  background:var(--dark);
+  color:white;
+  border-radius:24px;
+  padding:30px
+}
+
+.price{
+  font-size:42px;
+  font-weight:900;
+  margin:12px 0
+}
+
+ul{
+  padding-left:20px;
+  line-height:1.9
+}
+
+.form-card{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:24px;
+  padding:28px
+}
+
+input{
+  width:100%;
+  padding:13px;
+  border:1px solid var(--border);
+  border-radius:10px;
+  margin:7px 0 14px;
+  font-size:15px
+}
+
+footer{
+  background:var(--dark);
+  color:white;
+  padding:35px 20px;
+  text-align:center;
+  margin-top:30px
+}
+
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.5);
+  z-index:3000;
+  align-items:center;
+  justify-content:center;
+  padding:20px
+}
+
+.modal-box{
+  background:white;
+  border-radius:20px;
+  padding:28px;
+  max-width:420px;
+  width:100%
+}
+
+.close{
+  float:right;
+  background:none;
+  border:0;
+  font-size:25px;
+  cursor:pointer
+}
+
+.notice{
+  font-size:12px;
+  color:var(--muted);
+  line-height:1.4
+}
+
+.city-badge{
+  display:inline-block;
+  background:#edf7f1;
+  color:var(--green);
+  padding:6px 10px;
+  border-radius:20px;
+  font-size:12px;
+  font-weight:800;
+  margin-bottom:8px
+}
+
 @media(max-width:800px){
-  .hero,.license{grid-template-columns:1fr}
-  .cards{grid-template-columns:1fr}
-  nav a{display:none}
-  #map{height:420px}
+
+  .hero,
+  .license{
+    grid-template-columns:1fr
+  }
+
+  .cards{
+    grid-template-columns:1fr
+  }
+
+  nav a{
+    display:none
+  }
+
+  #map{
+    height:420px
+  }
 }
 </style>
 </head>
+
 <body>
 
 <header>
   <div class="nav">
-    <div class="logo"><span class="paw">🐾</span> Huellitas Medellín</div>
+
+    <div class="logo">
+      <span class="paw">🐾</span>
+      Patitas Colombia
+    </div>
+
     <nav>
       <a href="#mapa">Mapa</a>
       <a href="#lugares">Lugares</a>
-      <a href="#licencia">Licencia</a>
-      <button class="btn btn-primary" onclick="openModal()">Iniciar sesión</button>
+      <a href="#licencia">Membresía</a>
+
+      <button class="btn btn-primary" onclick="openModal()">
+        Iniciar sesión
+      </button>
     </nav>
+
   </div>
 </header>
 
+
 <main>
+
+<!-- HERO -->
 <section class="hero">
+
   <div>
-    <div class="badge">MEDELLÍN · PET FRIENDLY</div>
-    <h1>Encuentra lugares para ir con tu huellita.</h1>
-    <p>Un mapa pensado para personas que quieren salir con sus perros. Consulta establecimientos con políticas pet friendly verificadas y descubre qué condiciones tiene cada lugar.</p>
-    <button class="btn btn-primary" onclick="document.getElementById('mapa').scrollIntoView({behavior:'smooth'})">Explorar el mapa</button>
+
+    <div class="badge">
+      🇨🇴 COLOMBIA · PET FRIENDLY
+    </div>
+
+    <h1>
+      Encuentra lugares para ir con tu huellita.
+    </h1>
+
+    <p>
+      Patitas Colombia es una plataforma para encontrar lugares
+      amigables con perros en diferentes ciudades del país.
+      Explora el mapa, descubre nuevos sitios y revisa las
+      condiciones antes de visitar cada lugar.
+    </p>
+
+    <button
+      class="btn btn-primary"
+      onclick="document.getElementById('mapa').scrollIntoView({behavior:'smooth'})">
+      Explorar el mapa
+    </button>
+
   </div>
-  <div class="hero-card"><div class="paw-art">🐶🐾</div></div>
+
+  <div class="hero-card">
+    <div class="paw-art">
+      🐶🐾🇨🇴
+    </div>
+  </div>
+
 </section>
 
+
+<!-- MAPA -->
 <section id="mapa">
-  <h2 class="section-title">Mapa de lugares pet friendly</h2>
-  <p class="section-sub">Los marcadores verdes corresponden a lugares cuya política pet friendly aparece publicada por el propio establecimiento.</p>
+
+  <h2 class="section-title">
+    Mapa pet friendly de Colombia
+  </h2>
+
+  <p class="section-sub">
+    Explora diferentes ciudades y descubre lugares donde
+    puedes compartir con tu perro. Las condiciones pueden
+    variar según cada establecimiento.
+  </p>
+
   <div class="map-wrap">
+
     <div id="map"></div>
-    <div class="legend">✓ Verificado = política publicada por el establecimiento. Las condiciones pueden variar; revisa el reglamento antes de ir.</div>
+
+    <div class="legend">
+      🐾 Explora ciudades de Colombia.
+      Verifica siempre las reglas de cada establecimiento
+      antes de asistir.
+    </div>
+
   </div>
+
 </section>
 
+
+<!-- LUGARES -->
 <section id="lugares">
-  <h2 class="section-title">Establecimientos destacados</h2>
-  <p class="section-sub">Datos de demostración basados en políticas públicas disponibles en línea.</p>
+
+  <h2 class="section-title">
+    Lugares y ciudades destacadas
+  </h2>
+
+  <p class="section-sub">
+    Patitas Colombia comienza en Medellín y puede crecer
+    para incluir lugares de todo el país.
+  </p>
+
+
   <div class="cards">
+
+    <!-- MEDELLÍN -->
     <article class="card">
-      <span class="badge">✓ Verificado</span>
-      <h3>Centro Comercial Santafé Medellín</h3>
-      <p>Pet friendly en áreas comunes. Tiene reglamento específico para mascotas y restricciones en algunas zonas.</p>
-      <small>El Poblado · Carrera 43A, Calle 7 Sur</small>
+
+      <span class="city-badge">
+        📍 Medellín
+      </span>
+
+      <span class="badge">
+        ✓ Verificado
+      </span>
+
+      <h3>
+        Centro Comercial Santafé Medellín
+      </h3>
+
+      <p>
+        Pet friendly en áreas comunes. Cuenta con reglas
+        específicas para mascotas y algunas restricciones.
+      </p>
+
+      <small>
+        El Poblado · Medellín
+      </small>
+
     </article>
+
+
     <article class="card">
-      <span class="badge">✓ Verificado</span>
-      <h3>Centro Comercial Los Molinos</h3>
-      <p>Centro comercial pet friendly con una zona especial para mascotas en el piso 8.</p>
-      <small>Belén · Calle 30A #82A-26</small>
+
+      <span class="city-badge">
+        📍 Medellín
+      </span>
+
+      <span class="badge">
+        ✓ Verificado
+      </span>
+
+      <h3>
+        Centro Comercial Los Molinos
+      </h3>
+
+      <p>
+        Centro comercial pet friendly con espacios
+        destinados para mascotas.
+      </p>
+
+      <small>
+        Belén · Medellín
+      </small>
+
     </article>
+
+
     <article class="card">
-      <span class="badge">✓ Verificado</span>
-      <h3>Centro Comercial El Diamante</h3>
-      <p>Se identifica públicamente como pet friendly y ofrece espacios para visitantes con mascotas.</p>
-      <small>Medellín · Calle 51 #73-134</small>
+
+      <span class="city-badge">
+        📍 Medellín
+      </span>
+
+      <span class="badge">
+        ✓ Verificado
+      </span>
+
+      <h3>
+        Centro Comercial El Diamante
+      </h3>
+
+      <p>
+        Lugar que se identifica públicamente como
+        pet friendly.
+      </p>
+
+      <small>
+        Medellín · Antioquia
+      </small>
+
     </article>
+
+
+    <!-- BOGOTÁ -->
     <article class="card">
-      <span class="badge">✓ Verificado</span>
-      <h3>Pane e Pomodoro</h3>
-      <p>Trattoria en Laureles que informa que es pet friendly y cuenta con terraza.</p>
-      <small>Laureles · Cra. 73 #5-6</small>
+
+      <span class="city-badge">
+        📍 Bogotá
+      </span>
+
+      <span class="badge">
+        PRÓXIMAMENTE
+      </span>
+
+      <h3>
+        Lugares pet friendly en Bogotá
+      </h3>
+
+      <p>
+        Próximamente podrás encontrar parques,
+        restaurantes, centros comerciales y otros
+        lugares amigables con perros.
+      </p>
+
+      <small>
+        Bogotá D.C. · Colombia
+      </small>
+
     </article>
+
+
+    <!-- CALI -->
     <article class="card">
-      <span class="badge">✓ Verificado</span>
-      <h3>La Toskana Bistró</h3>
-      <p>Cuenta con una política pet friendly publicada que establece condiciones de ingreso y permanencia.</p>
-      <small>Medellín · consultar condiciones del establecimiento</small>
+
+      <span class="city-badge">
+        📍 Cali
+      </span>
+
+      <span class="badge">
+        PRÓXIMAMENTE
+      </span>
+
+      <h3>
+        Lugares pet friendly en Cali
+      </h3>
+
+      <p>
+        Estamos preparando nuevos lugares para que
+        puedas disfrutar Cali junto a tu mascota.
+      </p>
+
+      <small>
+        Cali · Valle del Cauca
+      </small>
+
     </article>
+
+
+    <!-- CARTAGENA -->
     <article class="card">
-      <span class="badge">✓ Verificado</span>
-      <h3>Clínica Veterinaria Provet</h3>
-      <p>Servicio veterinario que publica una experiencia pet friendly para sus pacientes.</p>
-      <small>Estadio · Carrera 74 #48B-39</small>
+
+      <span class="city-badge">
+        📍 Cartagena
+      </span>
+
+      <span class="badge">
+        PRÓXIMAMENTE
+      </span>
+
+      <h3>
+        Lugares pet friendly en Cartagena
+      </h3>
+
+      <p>
+        Próximamente podrás explorar opciones
+        pet friendly en Cartagena.
+      </p>
+
+      <small>
+        Cartagena · Bolívar
+      </small>
+
     </article>
+
   </div>
+
 </section>
 
+
+<!-- MEMBRESÍA -->
 <section id="licencia">
-  <h2 class="section-title">Suscripciones Huellitas</h2>
-  <p class="section-sub">Elige el plan que mejor se adapte a ti y disfruta de beneficios para salir con tu perro.</p>
 
-  <div class="cards" style="grid-template-columns:repeat(2,1fr);margin-top:25px">
-    <article class="price-card" style="background:white;color:var(--text);border:1px solid var(--border)">
-      <span class="badge">PLAN MENSUAL</span>
-      <h3 style="font-size:25px;color:var(--dark)">Huellitas Mensual</h3>
-      <div class="price" style="color:var(--dark)">$20.000 <small style="font-size:15px;color:var(--muted)">/ mes</small></div>
-      <p><strong>¡1 mes GRATIS!</strong></p>
-      <p>Después del mes gratis, disfruta de <strong>2 meses con 50% de descuento</strong>: pagarías $10.000/mes durante esos dos meses.</p>
+  <h2 class="section-title">
+    Suscripciones Patitas Colombia
+  </h2>
+
+  <p class="section-sub">
+    Elige el plan que mejor se adapte a ti y disfruta
+    de beneficios para salir con tu perro.
+  </p>
+
+
+  <div
+    class="cards"
+    style="grid-template-columns:repeat(2,1fr);margin-top:25px">
+
+
+    <!-- PLAN MENSUAL -->
+    <article
+      class="price-card"
+      style="background:white;color:var(--text);border:1px solid var(--border)">
+
+      <span class="badge">
+        PLAN MENSUAL
+      </span>
+
+      <h3 style="font-size:25px;color:var(--dark)">
+        Patitas Mensual
+      </h3>
+
+      <div
+        class="price"
+        style="color:var(--dark)">
+        $20.000
+        <small
+          style="font-size:15px;color:var(--muted)">
+          / mes
+        </small>
+      </div>
+
+      <p>
+        <strong>¡1 mes GRATIS!</strong>
+      </p>
+
+      <p>
+        Después del mes gratis, disfruta de
+        <strong>2 meses con 50% de descuento</strong>.
+      </p>
+
       <ul>
-        <li>Acceso a establecimientos afiliados que acepten perros</li>
-        <li>Perfil digital de tu perro</li>
-        <li>Mapa pet friendly y favoritos</li>
-        <li>Cobertura del seguro de daños según sus condiciones</li>
+
+        <li>
+          Acceso a establecimientos afiliados
+        </li>
+
+        <li>
+          Perfil digital de tu perro
+        </li>
+
+        <li>
+          Mapa pet friendly y favoritos
+        </li>
+
+        <li>
+          Beneficios según las condiciones del servicio
+        </li>
+
       </ul>
-      <button class="btn btn-primary" onclick="openPurchase('mensual')">Elegir plan</button>
+
+      <button
+        class="btn btn-primary"
+        onclick="openPurchase('mensual')">
+        Elegir plan
+      </button>
+
     </article>
 
+
+    <!-- PLAN ANUAL -->
     <article class="price-card">
-      <span class="badge" style="background:#fff0c9;color:#684b0b">AHORRA $60.000</span>
-      <h3 style="font-size:25px">Huellitas Anual</h3>
-      <div style="color:#d9e8df;text-decoration:line-through;font-size:17px">$240.000</div>
-      <div class="price">$180.000 <small style="font-size:15px;color:#d9e8df">/ año</small></div>
-      <p><strong>Precio normal: $240.000 → con descuento: $180.000.</strong></p>
+
+      <span
+        class="badge"
+        style="background:#fff0c9;color:#684b0b">
+        AHORRA $60.000
+      </span>
+
+      <h3 style="font-size:25px">
+        Patitas Anual
+      </h3>
+
+      <div
+        style="color:#d9e8df;text-decoration:line-through;font-size:17px">
+        $240.000
+      </div>
+
+      <div class="price">
+        $180.000
+        <small
+          style="font-size:15px;color:#d9e8df">
+          / año
+        </small>
+      </div>
+
+      <p>
+        <strong>
+          Precio normal: $240.000 →
+          con descuento: $180.000.
+        </strong>
+      </p>
+
       <ul>
-        <li>Acceso a establecimientos afiliados que acepten perros</li>
-        <li>Perfil digital de tu perro</li>
-        <li>Mapa pet friendly y favoritos</li>
-        <li>Cobertura del seguro de daños según sus condiciones</li>
+
+        <li>
+          Acceso a establecimientos afiliados
+        </li>
+
+        <li>
+          Perfil digital de tu perro
+        </li>
+
+        <li>
+          Mapa pet friendly y favoritos
+        </li>
+
+        <li>
+          Beneficios según las condiciones del servicio
+        </li>
+
       </ul>
-      <button class="btn btn-primary" style="background:var(--gold);color:#3b2a0b" onclick="openPurchase('anual')">Elegir plan anual</button>
+
+      <button
+        class="btn btn-primary"
+        style="background:var(--gold);color:#3b2a0b"
+        onclick="openPurchase('anual')">
+
+        Elegir plan anual
+
+      </button>
+
     </article>
+
   </div>
 
-  <div class="form-card" style="margin-top:22px">
-    <h3>Acceso + protección para tu huellita</h3>
-    <p>Con una suscripción activa, podrás ingresar con tu perro a los <strong>establecimientos afiliados a Huellitas</strong> que acepten mascotas, respetando las reglas particulares de cada local.</p>
-    <p>Huellitas contará con un <strong>seguro de responsabilidad por daños</strong> para determinados incidentes ocasionados por perros de miembros activos. La cobertura estará sujeta a los límites, exclusiones, condiciones y proceso de reclamación de la póliza.</p>
-    <p class="notice"><strong>Importante:</strong> en el proyecto real, la cobertura deberá estar respaldada por una póliza válida y sus condiciones deberán informarse claramente al usuario.</p>
+
+  <div
+    class="form-card"
+    style="margin-top:22px">
+
+    <h3>
+      Acceso + beneficios para tu huellita
+    </h3>
+
+    <p>
+      Con una suscripción activa podrás acceder a los
+      beneficios disponibles en los establecimientos
+      afiliados a Patitas Colombia que acepten mascotas,
+      respetando las reglas particulares de cada lugar.
+    </p>
+
+    <p class="notice">
+
+      <strong>Importante:</strong>
+      en el proyecto real, cualquier seguro o cobertura
+      deberá estar respaldado por una póliza válida y sus
+      condiciones deberán informarse claramente al usuario.
+
+    </p>
+
   </div>
+
 </section>
+
 </main>
 
+
+<!-- FOOTER -->
 <footer>
-  <strong>🐾 Huellitas Medellín</strong>
-  <p>Prototipo conceptual de una plataforma para encontrar espacios amigables con perros.</p>
+
+  <strong>
+    🐾 Patitas Colombia
+  </strong>
+
+  <p>
+    Plataforma para encontrar espacios amigables
+    con perros en Colombia.
+  </p>
+
 </footer>
 
+
+<!-- LOGIN -->
 <div class="modal" id="loginModal">
+
   <div class="modal-box">
-    <button class="close" onclick="closeModal()">×</button>
-    <h2 id="authTitle">Iniciar sesión</h2>
-    <div id="authNameWrap" style="display:none">
-      <label>Nombre</label><input id="authName" type="text" placeholder="Tu nombre">
+
+    <button
+      class="close"
+      onclick="closeModal()">
+      ×
+    </button>
+
+    <h2 id="authTitle">
+      Iniciar sesión
+    </h2>
+
+    <div
+      id="authNameWrap"
+      style="display:none">
+
+      <label>
+        Nombre
+      </label>
+
+      <input
+        id="authName"
+        type="text"
+        placeholder="Tu nombre">
+
     </div>
-    <label>Correo</label><input id="authEmail" type="email" placeholder="tu@email.com" autocomplete="email">
-    <label>Contraseña</label><input id="authPassword" type="password" placeholder="••••••••" autocomplete="current-password">
-    <button id="authButton" class="btn btn-primary" style="width:100%" onclick="handleAuth()">Entrar</button>
-    <button id="authSwitch" class="btn btn-outline" style="width:100%;margin-top:10px" onclick="toggleAuthMode()">Crear cuenta</button>
-    <p id="authMessage" class="notice" style="margin-top:12px"></p>
-    <p class="notice">La contraseña se gestiona mediante Supabase Auth.</p>
+
+
+    <label>
+      Correo
+    </label>
+
+    <input
+      id="authEmail"
+      type="email"
+      placeholder="tu@email.com"
+      autocomplete="email">
+
+
+    <label>
+      Contraseña
+    </label>
+
+    <input
+      id="authPassword"
+      type="password"
+      placeholder="••••••••"
+      autocomplete="current-password">
+
+
+    <button
+      id="authButton"
+      class="btn btn-primary"
+      style="width:100%"
+      onclick="handleAuth()">
+
+      Entrar
+
+    </button>
+
+
+    <button
+      id="authSwitch"
+      class="btn btn-outline"
+      style="width:100%;margin-top:10px"
+      onclick="toggleAuthMode()">
+
+      Crear cuenta
+
+    </button>
+
+
+    <p
+      id="authMessage"
+      class="notice"
+      style="margin-top:12px">
+    </p>
+
+    <p class="notice">
+      La contraseña se gestiona mediante Supabase Auth.
+    </p>
+
   </div>
+
 </div>
 
 
+<!-- PAGO -->
 <div class="modal" id="successModal">
-  <div class="modal-box" style="text-align:center">
-    <div style="font-size:54px">🐾</div>
-    <h2 style="color:var(--dark)">¡Pago simulado exitoso!</h2>
-    <p>Tu membresía Huellitas aparece como activa en esta demostración.</p>
-    <div style="background:var(--light);border-radius:14px;padding:18px;text-align:left;margin:18px 0">
-      <p><strong>Plan:</strong> <span id="successPlan">—</span></p>
-      <p><strong>Valor:</strong> <span id="successPrice">—</span></p>
-      <p><strong>Vigencia:</strong> <span id="successValidity">—</span></p>
-      <p><strong>Seguro de daños:</strong> Activo según las condiciones de la póliza</p>
-      <p><strong>Código de membresía:</strong> <span id="successCode">—</span></p>
+
+  <div
+    class="modal-box"
+    style="text-align:center">
+
+    <div style="font-size:54px">
+      🐾
     </div>
-    <p id="successPromo" class="notice"></p>
-    <button class="btn btn-primary" style="width:100%" onclick="closeSuccess()">Continuar</button>
+
+    <h2 style="color:var(--dark)">
+      ¡Pago simulado exitoso!
+    </h2>
+
+    <p>
+      Tu membresía Patitas Colombia aparece
+      como activa en esta demostración.
+    </p>
+
+    <div
+      style="background:var(--light);border-radius:14px;padding:18px;text-align:left;margin:18px 0">
+
+      <p>
+        <strong>Plan:</strong>
+        <span id="successPlan">—</span>
+      </p>
+
+      <p>
+        <strong>Valor:</strong>
+        <span id="successPrice">—</span>
+      </p>
+
+      <p>
+        <strong>Vigencia:</strong>
+        <span id="successValidity">—</span>
+      </p>
+
+      <p>
+        <strong>Código de membresía:</strong>
+        <span id="successCode">—</span>
+      </p>
+
+    </div>
+
+    <p
+      id="successPromo"
+      class="notice">
+    </p>
+
+    <button
+      class="btn btn-primary"
+      style="width:100%"
+      onclick="closeSuccess()">
+
+      Continuar
+
+    </button>
+
   </div>
+
 </div>
 
-<div class="modal" id="purchaseModal"><div class="modal-box"><button class="close" onclick="closePurchase()">×</button><h2 id="purchaseTitle">Elegir suscripción</h2><p id="purchasePrice"><strong>Selecciona un plan</strong></p><input placeholder="Nombre del perro"><input placeholder="Nombre del responsable"><input type="email" placeholder="Correo">
-    <h3 style="margin-top:20px">Datos de pago — SIMULACIÓN</h3>
-    <p class="notice">Usa únicamente datos ficticios. Este prototipo no procesa ni almacena información bancaria real.</p>
-    <select style="width:100%;padding:13px;border:1px solid var(--border);border-radius:10px;margin:7px 0 14px;font-size:15px">
-      <option>Tarjeta de crédito / débito (demo)</option>
-      <option>Transferencia bancaria (demo)</option>
-      <option>PSE (demo)</option>
-    </select>
-    <input placeholder="Número de tarjeta de prueba">
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-      <input placeholder="MM/AA">
-      <input placeholder="CVV de prueba">
-    </div>
-    <input placeholder="Nombre del titular (ficticio)">
-    <input placeholder="Banco (demo)">
-    <input placeholder="Número de cuenta de prueba">
-<button class="btn btn-primary" style="width:100%" onclick="completePurchase()">Realizar pago simulado</button><p class="notice">Prototipo: no ingreses datos bancarios reales.</p></div></div>
 
+<!-- MODAL DE COMPRA -->
+<div
+  class="modal"
+  id="purchaseModal">
+
+  <div class="modal-box">
+
+    <button
+      class="close"
+      onclick="closePurchase()">
+      ×
+    </button>
+
+    <h2 id="purchaseTitle">
+      Elegir suscripción
+    </h2>
+
+    <p id="purchasePrice">
+      <strong>
+        Selecciona un plan
+      </strong>
+    </p>
+
+
+    <input
+      placeholder="Nombre del perro">
+
+    <input
+      placeholder="Nombre del responsable">
+
+    <input
+      type="email"
+      placeholder="Correo">
+
+
+    <h3 style="margin-top:20px">
+      Datos de pago — SIMULACIÓN
+    </h3>
+
+    <p class="notice">
+      Usa únicamente datos ficticios.
+      Este prototipo no procesa ni almacena
+      información bancaria real.
+    </p>
+
+
+    <select
+      style="width:100%;padding:13px;border:1px solid var(--border);border-radius:10px;margin:7px 0 14px;font-size:15px">
+
+      <option>
+        Tarjeta de crédito / débito (demo)
+      </option>
+
+      <option>
+        Transferencia bancaria (demo)
+      </option>
+
+      <option>
+        PSE (demo)
+      </option>
+
+    </select>
+
+
+    <input
+      placeholder="Número de tarjeta de prueba">
+
+    <div
+      style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+
+      <input
+        placeholder="MM/AA">
+
+      <input
+        placeholder="CVV de prueba">
+
+    </div>
+
+
+    <input
+      placeholder="Nombre del titular (ficticio)">
+
+    <input
+      placeholder="Banco (demo)">
+
+    <input
+      placeholder="Número de cuenta de prueba">
+
+
+    <button
+      class="btn btn-primary"
+      style="width:100%"
+      onclick="completePurchase()">
+
+      Realizar pago simulado
+
+    </button>
+
+    <p class="notice">
+      Prototipo: no ingreses datos bancarios reales.
+    </p>
+
+  </div>
+
+</div>
+
+
+<!-- SCRIPTS -->
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <script>
-const SUPABASE_URL = 'https://hiizyaoferdwebnymvpg.supabase.co/rest/v1/';
+
+// =============================
+// SUPABASE
+// =============================
+
+const SUPABASE_URL = 'https://hiizyaoferdwebnymvpg.supabase.co';
+
 const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_XOe_ZspIakCkMItNFWuLpQ_v_iBA-OI';
+
 let supabaseClient = null;
+
 let authMode = 'login';
 
-if (SUPABASE_URL.startsWith('https://') && SUPABASE_PUBLISHABLE_KEY.startsWith('sb_')) {
-  supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+
+if(
+  SUPABASE_URL.startsWith('https://') &&
+  SUPABASE_PUBLISHABLE_KEY.startsWith('sb_')
+){
+
+  supabaseClient =
+    window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_PUBLISHABLE_KEY
+    );
+
 }
 
-const map = L.map('map').setView([6.2442,-75.5812],12);
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
-  maxZoom:19, attribution:'© OpenStreetMap'
-}).addTo(map);
 
-const places=[
-  {name:'Centro Comercial Santafé Medellín',lat:6.1939,lng:-75.5730,desc:'Pet friendly. Revisa su reglamento y las zonas donde se permite el ingreso.'},
-  {name:'Centro Comercial Los Molinos',lat:6.2335,lng:-75.6070,desc:'Centro comercial pet friendly. Zona especial para mascotas en el piso 8.'},
-  {name:'Centro Comercial El Diamante',lat:6.2640,lng:-75.5890,desc:'Se identifica como pet friendly.'},
-  {name:'Pane e Pomodoro',lat:6.2398,lng:-75.5952,desc:'Pet friendly y con terraza, según su sitio oficial.'},
-  {name:'La Toskana Bistró',lat:6.2070,lng:-75.5680,desc:'Cuenta con política pet friendly publicada.'},
-  {name:'Clínica Veterinaria Provet',lat:6.2580,lng:-75.5920,desc:'Servicio veterinario con experiencia pet friendly.'}
+// =============================
+// MAPA DE COLOMBIA
+// =============================
+
+const map =
+  L.map('map').setView(
+    [4.5709,-74.2973],
+    5
+  );
+
+
+L.tileLayer(
+  'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+  {
+    maxZoom:19,
+    attribution:'© OpenStreetMap'
+  }
+).addTo(map);
+
+
+// =============================
+// CIUDADES DE COLOMBIA
+// =============================
+
+const cities = [
+
+  {
+    name:'Bogotá',
+    lat:4.7110,
+    lng:-74.0721,
+    desc:'Capital de Colombia. Próximamente más lugares pet friendly.'
+  },
+
+  {
+    name:'Medellín',
+    lat:6.2442,
+    lng:-75.5812,
+    desc:'Ciudad de origen del proyecto Patitas Colombia.'
+  },
+
+  {
+    name:'Cali',
+    lat:3.4516,
+    lng:-76.5320,
+    desc:'Próximamente más lugares pet friendly en Cali.'
+  },
+
+  {
+    name:'Cartagena',
+    lat:10.3910,
+    lng:-75.4794,
+    desc:'Próximamente más lugares pet friendly en Cartagena.'
+  },
+
+  {
+    name:'Barranquilla',
+    lat:10.9685,
+    lng:-74.7813,
+    desc:'Próximamente más lugares pet friendly en Barranquilla.'
+  },
+
+  {
+    name:'Bucaramanga',
+    lat:7.1193,
+    lng:-73.1227,
+    desc:'Próximamente más lugares pet friendly en Bucaramanga.'
+  },
+
+  {
+    name:'Pereira',
+    lat:4.8143,
+    lng:-75.6946,
+    desc:'Próximamente más lugares pet friendly en Pereira.'
+  },
+
+  {
+    name:'Santa Marta',
+    lat:11.2408,
+    lng:-74.1990,
+    desc:'Próximamente más lugares pet friendly en Santa Marta.'
+  }
+
 ];
-places.forEach(p=>L.marker([p.lat,p.lng]).addTo(map).bindPopup(`<strong>✓ ${p.name}</strong><br>${p.desc}`));
 
-function openModal(){document.getElementById('loginModal').style.display='flex';updateAuthUI();showAuthMessage('')}
-function closeModal(){document.getElementById('loginModal').style.display='none'}
-function toggleAuthMode(){authMode=authMode==='login'?'signup':'login';updateAuthUI();showAuthMessage('')}
-function updateAuthUI(){
-  const signup=authMode==='signup';
-  document.getElementById('authTitle').textContent=signup?'Crear cuenta':'Iniciar sesión';
-  document.getElementById('authButton').textContent=signup?'Crear cuenta':'Entrar';
-  document.getElementById('authSwitch').textContent=signup?'Ya tengo una cuenta':'Crear cuenta';
-  document.getElementById('authNameWrap').style.display=signup?'block':'none';
-  document.getElementById('authPassword').autocomplete=signup?'new-password':'current-password';
-}
-function showAuthMessage(msg,error=false){
-  const el=document.getElementById('authMessage');
-  el.textContent=msg||'';
-  el.style.color=error?'#a33':'var(--muted)';
-}
-async function handleAuth(){
-  if(!supabaseClient){showAuthMessage('Falta configurar Supabase en este archivo.',true);return;}
-  const email=document.getElementById('authEmail').value.trim();
-  const password=document.getElementById('authPassword').value;
-  const name=document.getElementById('authName').value.trim();
-  if(!email||!password){showAuthMessage('Escribe tu correo y contraseña.',true);return;}
-  if(password.length<6){showAuthMessage('La contraseña debe tener al menos 6 caracteres.',true);return;}
-  const btn=document.getElementById('authButton');btn.disabled=true;showAuthMessage('Procesando...');
-  try{
-    let result;
-    if(authMode==='signup'){
-      result=await supabaseClient.auth.signUp({email,password,options:{data:{nombre:name}}});
-      if(result.error)throw result.error;
-      showAuthMessage(result.data.session?'Cuenta creada e inicio de sesión realizado.':'Cuenta creada. Revisa tu correo si se solicita confirmación.');
-      if(result.data.session)setTimeout(closeModal,900);
-    }else{
-      result=await supabaseClient.auth.signInWithPassword({email,password});
-      if(result.error)throw result.error;
-      showAuthMessage('Inicio de sesión correcto.');
-      setTimeout(closeModal,700);
-    }
-  }catch(error){showAuthMessage(error.message||'No fue posible completar la operación.',true)}
-  finally{btn.disabled=false}
-}
-async function updateLoginButton(){
-  const btn=document.querySelector('header .btn-primary');
-  if(!btn||!supabaseClient)return;
-  const {data:{session}}=await supabaseClient.auth.getSession();
-  btn.textContent=session?'Cerrar sesión':'Iniciar sesión';
-  btn.onclick=session?async()=>{await supabaseClient.auth.signOut();updateLoginButton()}:openModal;
-}
-if(supabaseClient){
-  supabaseClient.auth.onAuthStateChange(()=>updateLoginButton());
-  updateLoginButton();
-}
-function openPurchase(plan){document.getElementById('purchaseTitle').textContent=plan==='anual'?'Huellitas Anual':'Huellitas Mensual';document.getElementById('purchasePrice').innerHTML=plan==='anual'?'<strong>$200.000 / año</strong> <span style="color:#68756d;text-decoration:line-through">$240.000</span>':'<strong>$20.000 / mes</strong>';document.getElementById('purchaseModal').style.display='flex'}
-function closePurchase(){document.getElementById('purchaseModal').style.display='none'}
 
-function completePurchase(){
-  const title = document.getElementById('purchaseTitle').textContent;
-  const priceText = document.getElementById('purchasePrice').innerText;
-  const annual = title.toLowerCase().includes('anual');
+cities.forEach(city => {
 
-  document.getElementById('successPlan').textContent = annual ? 'Huellitas Anual' : 'Huellitas Mensual';
-  document.getElementById('successPrice').textContent = annual ? '$180.000 COP' : '$20.000 COP/mes';
-  document.getElementById('successValidity').textContent = annual ? '1 año' : 'Mes a mes';
-  document.getElementById('successCode').textContent = 'HUE-' + Math.floor(100000 + Math.random() * 900000);
-  document.getElementById('successPromo').textContent = annual
-    ? 'Descuento aplicado: precio normal $240.000 → $180.000. Ahorras $60.000.'
-    : 'Promoción aplicada: 1 mes GRATIS y, después, 2 meses con 50% de descuento ($10.000/mes).';
-  document.getElementById('purchaseModal').style.display='none';
-  document.getElementById('successModal').style.display='flex';
-}
-function closeSuccess(){document.getElementById('successModal').style.display='none'}
+  L.marker([
+    city.lat,
+    city.lng
+  ])
+  .addTo(map)
+  .bindPopup(`
+    <strong>🐾 ${city.name}</strong>
+    <br>
+    ${city.desc}
+  `);
 
-window.onclick=e=>{
-  if(e.target.id==='loginModal')closeModal();
-  if(e.target.id==='purchaseModal')closePurchase();
-}
-</script>
-</body>
-</html>
+});
+
+
+// =============================
+// LUGARES DE MEDELLÍN
+// =============================
+
+const places = [
+
+  {
+    name:'Centro Comercial Santafé Medellín',
+    lat:6.1939,
+    lng:-75.5730,
+    desc:'Pet friendly. Revisa su reglamento y las zonas donde se permite el ingreso.'
+  },
+
+  {
+    name:'Centro Comercial Los Molinos',
+    lat:6.2335,
+    lng:-75.6070,
+    desc:'Centro comercial pet friendly.'
+  },
+
+  {
+    name:'Centro Comercial El Diamante',
+    lat:6.2640,
+    lng:-75.5890,
+    desc:'Se identifica como pet friendly.'
+  },
+
+  {
+    name:'Pane e Pomodoro',
+    lat:6.2398,
+    lng:-75.5952,
+    desc:'Pet friendly y con terraza, según la información disponible en el proyecto.'
+  },
+
+  {
+    name:'La Toskana Bistró',
+    lat:6.2070,
+    lng:-75.5680,
+    desc:'Cuenta con política pet friendly publicada.'
+  },
+
+  {
+    name:'Clínica Veterinaria Provet',
+    lat:6.2580,
+    lng:-75.5920,
+    desc:'Servicio veterinario con experiencia pet friendly.'
+  }
+
+];
+
+
+places.forEach(p => {
+
+  L.marker([
+    p.lat,
+    p.lng
+  ])
+  .addTo(map)
+  .bindPopup(`
+    <strong>✓ ${p.name}</strong>
+    <br>
+    ${p.desc}
+  `);
+
+});
+
+
+// =============================
+// LOGIN
+// =============================
+
+function openModal(){
+
+  docume
