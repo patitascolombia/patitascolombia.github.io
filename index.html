@@ -362,12 +362,60 @@ footer{
   border:1px solid var(--border);
   border-radius:16px;
   padding:15px;
-  margin-top:15px;
+  margin-top:15px
 }
 
 @media(max-width:800px){
   .account-pets{grid-template-columns:1fr}
   .hero-dog{min-height:260px}
+}
+
+.support-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+  margin-top:22px;
+}
+
+.support-card{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:22px;
+}
+
+.support-card h3{
+  margin:8px 0;
+  color:var(--dark);
+}
+
+.support-card p{
+  color:var(--muted);
+  line-height:1.55;
+}
+
+.support-icon{
+  font-size:32px;
+}
+
+.support-actions{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top:14px;
+}
+
+.support-actions .btn{
+  flex:1;
+  min-width:170px;
+}
+
+.reset-modal-box{
+  max-width:430px;
+}
+
+@media(max-width:800px){
+  .support-grid{grid-template-columns:1fr}
 }
 
 </style>
@@ -387,6 +435,7 @@ footer{
       <a href="#mapa">Mapa</a>
       <a href="#lugares">Lugares</a>
       <a href="#licencia">Membresía</a>
+      <a href="#soporte">Soporte</a>
 
       <button class="btn btn-primary" onclick="openModal()">
         Iniciar sesión
@@ -639,10 +688,8 @@ footer{
 
   </div>
 
-</section>
-
-
-<!-- MEMBRESÍA -->
+  </section>
+  <!-- MEMBRESÍA -->
 <section id="licencia">
 
   <h2 class="section-title">
@@ -654,11 +701,9 @@ footer{
     de beneficios para salir con tu perro.
   </p>
 
-
   <div
     class="cards"
     style="grid-template-columns:repeat(2,1fr);margin-top:25px">
-
 
     <!-- PLAN MENSUAL -->
     <article
@@ -816,6 +861,114 @@ footer{
 
 </section>
 
+
+<!-- SOPORTE -->
+<section id="soporte">
+
+  <h2 class="section-title">
+    Centro de soporte
+  </h2>
+
+  <p class="section-sub">
+    ¿Tienes problemas para entrar a tu cuenta o necesitas ayuda?
+    Aquí tienes las opciones más comunes.
+  </p>
+
+  <div class="support-grid">
+
+    <article class="support-card">
+
+      <div class="support-icon">🔑</div>
+
+      <h3>
+        Olvidé mi contraseña
+      </h3>
+
+      <p>
+        Te enviaremos un correo para que puedas crear una nueva contraseña
+        de forma segura con Supabase.
+      </p>
+
+      <div class="support-actions">
+
+        <button
+          class="btn btn-primary"
+          onclick="openResetModal()">
+          Restablecer contraseña
+        </button>
+
+      </div>
+
+    </article>
+
+
+    <article class="support-card">
+
+      <div class="support-icon">📧</div>
+
+      <h3>
+        No me llega el correo
+      </h3>
+
+      <p>
+        Revisa la carpeta de spam o correo no deseado y confirma que
+        escribiste correctamente tu dirección de correo.
+      </p>
+
+    </article>
+
+
+    <article class="support-card">
+
+      <div class="support-icon">🐾</div>
+
+      <h3>
+        Mi cuenta o mascotas
+      </h3>
+
+      <p>
+        En “Mi cuenta” puedes consultar tus mascotas, editar sus datos
+        y registrar hasta 3 mascotas.
+      </p>
+
+      <div class="support-actions">
+
+        <button
+          class="btn btn-outline"
+          onclick="openModal()">
+          Ir a Mi cuenta
+        </button>
+
+      </div>
+
+    </article>
+
+  </div>
+
+
+  <div
+    class="form-card"
+    style="margin-top:22px">
+
+    <h3>
+      💡 Antes de pedir ayuda
+    </h3>
+
+    <p
+      class="notice"
+      style="font-size:14px">
+
+      Si algo no funciona, intenta actualizar la página y volver a iniciar sesión.
+      Nunca compartas tu contraseña con otra persona. Patitas Colombia no necesita
+      que nos envíes tu contraseña para ayudarte.
+
+    </p>
+
+  </div>
+
+</section>
+
+
 </main>
 
 
@@ -836,28 +989,183 @@ footer{
 
 <!-- LOGIN / CUENTA -->
 <div class="modal" id="loginModal">
+
   <div class="modal-box">
-    <button class="close" onclick="closeModal()">×</button>
 
-    <h2 id="authTitle">Iniciar sesión</h2>
+    <button
+      class="close"
+      onclick="closeModal()">
+      ×
+    </button>
 
-    <div id="authNameWrap" style="display:none">
-      <label>Nombre</label>
-      <input id="authName" type="text" placeholder="Tu nombre" autocomplete="name">
+    <h2 id="authTitle">
+      Iniciar sesión
+    </h2>
+
+    <div
+      id="authNameWrap"
+      style="display:none">
+
+      <label>
+        Nombre
+      </label>
+
+      <input
+        id="authName"
+        type="text"
+        placeholder="Tu nombre"
+        autocomplete="name">
+
     </div>
 
-    <label>Correo</label>
-    <input id="authEmail" type="email" placeholder="tu@email.com" autocomplete="email">
 
-    <label>Contraseña</label>
-    <input id="authPassword" type="password" placeholder="••••••••" autocomplete="current-password">
+    <label>
+      Correo
+    </label>
 
-    <button id="authButton" class="btn btn-primary" style="width:100%" onclick="handleAuth()">Entrar</button>
+    <input
+      id="authEmail"
+      type="email"
+      placeholder="tu@email.com"
+      autocomplete="email">
 
-    <button id="authSwitch" class="btn btn-outline" style="width:100%;margin-top:10px" onclick="toggleAuthMode()">Crear cuenta</button>
 
-    <p id="authMessage" class="notice" style="margin-top:12px"></p>
-    <p class="notice">Tu cuenta y tus mascotas se guardan en Supabase.</p>
+    <label>
+      Contraseña
+    </label>
+
+    <input
+      id="authPassword"
+      type="password"
+      placeholder="••••••••"
+      autocomplete="current-password">
+
+
+    <button
+      id="authButton"
+      class="btn btn-primary"
+      style="width:100%"
+      onclick="handleAuth()">
+      Entrar
+    </button>
+
+
+    <button
+      id="forgotPasswordButton"
+      class="btn btn-outline"
+      style="width:100%;margin-top:10px"
+      onclick="openResetModal()">
+      ¿Olvidaste tu contraseña?
+    </button>
+
+
+    <button
+      id="authSwitch"
+      class="btn btn-outline"
+      style="width:100%;margin-top:10px"
+      onclick="toggleAuthMode()">
+      Crear cuenta
+    </button>
+
+
+    <p
+      id="authMessage"
+      class="notice"
+      style="margin-top:12px">
+    </p>
+
+    <p class="notice">
+      Tu cuenta y tus mascotas se guardan en Supabase.
+    </p>
+
+  </div>
+
+</div>
+
+
+<!-- RESTABLECER CONTRASEÑA -->
+<div
+  class="modal"
+  id="resetModal">
+
+  <div
+    class="modal-box reset-modal-box">
+
+    <button
+      class="close"
+      onclick="closeResetModal()">
+      ×
+    </button>
+
+    <h2 id="resetTitle">
+      🔑 Recuperar contraseña
+    </h2>
+
+    <div id="resetRequestView">
+
+      <p>
+        Escribe el correo de tu cuenta y te enviaremos un enlace
+        para crear una nueva contraseña.
+      </p>
+
+      <label>
+        Correo
+      </label>
+
+      <input
+        id="resetEmail"
+        type="email"
+        placeholder="tu@email.com"
+        autocomplete="email">
+
+      <button
+        class="btn btn-primary"
+        style="width:100%"
+        onclick="sendResetEmail()">
+        Enviar enlace de recuperación
+      </button>
+
+      <button
+        class="btn btn-outline"
+        style="width:100%;margin-top:10px"
+        onclick="closeResetModal()">
+        Cancelar
+      </button>
+
+    </div>
+
+
+    <div
+      id="resetPasswordView"
+      style="display:none">
+
+      <p>
+        Crea una nueva contraseña para tu cuenta.
+      </p>
+
+      <label>
+        Nueva contraseña
+      </label>
+
+      <input
+        id="newPassword"
+        type="password"
+        placeholder="Mínimo 6 caracteres"
+        autocomplete="new-password">
+
+      <label>
+        Repite la contraseña
+      </label>
+
+      <input
+        id="newPasswordConfirm"
+        type="password"
+        placeholder="Repite tu contraseña"
+        autocomplete="new-password">
+              <button class="btn btn-primary" style="width:100%" onclick="updatePassword()">Guardar nueva contraseña</button>
+    </div>
+
+    <p id="resetMessage" class="notice" style="margin-top:12px"></p>
   </div>
 </div>
 
@@ -919,6 +1227,7 @@ footer{
         <button class="btn btn-primary" style="flex:1" onclick="savePet()">Guardar mascota</button>
         <button class="btn btn-outline" style="flex:1" onclick="hidePetForm()">Cancelar</button>
       </div>
+
       <p id="petMessage" class="notice" style="margin-top:10px"></p>
     </div>
   </div>
@@ -1093,6 +1402,8 @@ footer{
   </div>
 
 </div>
+
+
 <!-- SCRIPTS -->
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -1111,6 +1422,7 @@ const supabaseClient = window.supabase.createClient(
 
 let authMode = 'login';
 let selectedPlan = '';
+let recoveryMode = false;
 
 function friendlyAuthError(error){
   const msg = (error?.message || '').toLowerCase();
@@ -1179,6 +1491,7 @@ async function handleAuth(){
     message.textContent='Escribe tu correo y contraseña.';
     return;
   }
+
   if(password.length<6){
     message.textContent='La contraseña debe tener al menos 6 caracteres.';
     return;
@@ -1225,7 +1538,83 @@ async function handleAuth(){
   }
 }
 
-async function logout(){
+function openResetModal(){
+  closeModal();
+  document.getElementById('resetModal').style.display='flex';
+  document.getElementById('resetMessage').textContent='';
+
+  if(!recoveryMode){
+    document.getElementById('resetRequestView').style.display='block';
+    document.getElementById('resetPasswordView').style.display='none';
+    document.getElementById('resetTitle').textContent='🔑 Recuperar contraseña';
+  }
+}
+
+function closeResetModal(){
+  document.getElementById('resetModal').style.display='none';
+  document.getElementById('resetMessage').textContent='';
+}
+
+async function sendResetEmail(){
+  const email=document.getElementById('resetEmail').value.trim().toLowerCase();
+  const message=document.getElementById('resetMessage');
+
+  if(!email){
+    message.textContent='Escribe el correo de tu cuenta.';
+    return;
+  }
+
+  message.textContent='Enviando enlace...';
+
+  try{
+    const redirectTo=window.location.origin + window.location.pathname;
+
+    const { error } = await supabaseClient.auth.resetPasswordForEmail(email,{
+      redirectTo
+    });
+
+    if(error) throw error;
+
+    message.textContent='Listo. Revisa tu correo y abre el enlace de recuperación.';
+  }catch(error){
+    console.error(error);
+    message.textContent=friendlyAuthError(error);
+  }
+}
+
+async function updatePassword(){
+  const password=document.getElementById('newPassword').value;
+  const confirm=document.getElementById('newPasswordConfirm').value;
+  const message=document.getElementById('resetMessage');
+
+  if(password.length<6){
+    message.textContent='La nueva contraseña debe tener al menos 6 caracteres.';
+    return;
+  }
+
+  if(password!==confirm){
+    message.textContent='Las contraseñas no coinciden.';
+    return;
+  }
+
+  message.textContent='Guardando nueva contraseña...';
+
+  try{
+    const { error } = await supabaseClient.auth.updateUser({ password });
+
+    if(error) throw error;
+
+    recoveryMode=false;
+
+    message.textContent='¡Contraseña actualizada! Ya puedes iniciar sesión con tu nueva contraseña.';
+
+    document.getElementById('resetRequestView').style.display='none';
+    document.getElementById('resetPasswordView').style.display='none';
+
+    setTimeout(closeResetModal,1200);
+  }catch(error){
+    console.error(error);
+    message.textContent=friendlyAuthError(error);async function logout(){
   await supabaseClient.auth.signOut();
   closeAccount();
   updateHeader();
@@ -1234,12 +1623,15 @@ async function logout(){
 async function updateHeader(){
   const button=document.querySelector('header nav .btn-primary');
   if(!button) return;
+
   const user=await getCurrentUser();
+
   button.textContent=user ? '👤 Mi cuenta' : 'Iniciar sesión';
 }
 
 async function loadAccount(){
   const user=await getCurrentUser();
+
   if(!user){
     closeAccount();
     updateHeader();
@@ -1247,8 +1639,10 @@ async function loadAccount(){
   }
 
   const name=user.user_metadata?.name || 'Usuario';
+
   document.getElementById('accountName').textContent=name;
   document.getElementById('accountEmail').textContent=user.email || '';
+
   await renderPets();
 }
 
@@ -1284,6 +1678,7 @@ function clearPetForm(){
   ['petId','petName','petBreed','petAge','petColor','petInfo'].forEach(id=>{
     document.getElementById(id).value='';
   });
+
   document.getElementById('petSpecies').value='Perro';
   document.getElementById('petSex').value='No especificado';
   document.getElementById('petPhoto').value='';
@@ -1319,38 +1714,66 @@ async function editPet(id){
 
 function readPhoto(file){
   return new Promise((resolve,reject)=>{
-    if(!file){ resolve(null); return; }
+    if(!file){
+      resolve(null);
+      return;
+    }
 
     const reader=new FileReader();
+
     reader.onload=()=>{
       const img=new Image();
+
       img.onload=()=>{
         const max=1000;
         const scale=Math.min(1,max/Math.max(img.width,img.height));
+
         const canvas=document.createElement('canvas');
+
         canvas.width=Math.max(1,Math.round(img.width*scale));
         canvas.height=Math.max(1,Math.round(img.height*scale));
+
         const ctx=canvas.getContext('2d');
-        ctx.drawImage(img,0,0,canvas.width,canvas.height);
+
+        ctx.drawImage(
+          img,
+          0,
+          0,
+          canvas.width,
+          canvas.height
+        );
+
         canvas.toBlob(
           blob=>{
-            if(!blob) return reject(new Error('No se pudo preparar la foto.'));
+            if(!blob){
+              return reject(new Error('No se pudo preparar la foto.'));
+            }
+
             resolve(blob);
           },
           'image/jpeg',
           0.82
         );
       };
-      img.onerror=()=>reject(new Error('No se pudo leer la imagen.'));
+
+      img.onerror=()=>{
+        reject(new Error('No se pudo leer la imagen.'));
+      };
+
       img.src=reader.result;
     };
-    reader.onerror=()=>reject(new Error('No se pudo cargar la foto.'));
+
+    reader.onerror=()=>{
+      reject(new Error('No se pudo cargar la foto.'));
+    };
+
     reader.readAsDataURL(file);
   });
 }
 
 async function uploadPetPhoto(userId, file){
   const blob=await readPhoto(file);
+
   if(!blob) return null;
 
   const path=`${userId}/${crypto.randomUUID()}.jpg`;
@@ -1368,7 +1791,10 @@ async function uploadPetPhoto(userId, file){
     .from('pet-photos')
     .getPublicUrl(path);
 
-  return { url:data.publicUrl, path };
+  return {
+    url:data.publicUrl,
+    path
+  };
 }
 
 async function savePet(){
@@ -1381,6 +1807,7 @@ async function savePet(){
   }
 
   const name=document.getElementById('petName').value.trim();
+
   if(!name){
     message.textContent='Escribe el nombre de tu mascota.';
     return;
@@ -1388,6 +1815,7 @@ async function savePet(){
 
   const id=document.getElementById('petId').value;
   const isEdit=!!id;
+
   message.textContent='Guardando...';
 
   try{
@@ -1405,6 +1833,7 @@ async function savePet(){
 
     let photoUrl=null;
     let photoPath=null;
+
     const file=document.getElementById('petPhoto').files[0];
 
     if(file){
@@ -1436,8 +1865,11 @@ async function savePet(){
         .eq('user_id', user.id);
 
       if(error) throw error;
+
     }else{
+
       petData.user_id=user.id;
+
       if(photoUrl){
         petData.photo_url=photoUrl;
         petData.photo_path=photoPath;
@@ -1451,8 +1883,11 @@ async function savePet(){
     }
 
     message.textContent='Mascota guardada correctamente.';
+
     await renderPets();
+
     setTimeout(hidePetForm,500);
+
   }catch(error){
     console.error(error);
     message.textContent='No se pudo guardar. Revisa la configuración de Supabase.';
@@ -1463,9 +1898,11 @@ async function deletePet(id){
   if(!confirm('¿Eliminar esta mascota?')) return;
 
   const user=await getCurrentUser();
+
   if(!user) return;
 
   try{
+
     const { data:pet } = await supabaseClient
       .from('pets')
       .select('photo_path')
@@ -1488,16 +1925,20 @@ async function deletePet(id){
     }
 
     await renderPets();
+
   }catch(error){
     console.error(error);
     alert('No se pudo eliminar la mascota.');
   }
 }
-  async function renderPets(){
+
+async function renderPets(){
   const list=document.getElementById('petsList');
+
   list.innerHTML='<p class="notice">Cargando mascotas...</p>';
 
   const user=await getCurrentUser();
+
   if(!user){
     list.innerHTML='';
     return;
@@ -1511,14 +1952,22 @@ async function deletePet(id){
 
   if(error){
     console.error(error);
+
     list.innerHTML='<p class="notice">No se pudieron cargar las mascotas. Revisa la tabla "pets" y sus políticas RLS.</p>';
+
     return;
   }
 
   document.getElementById('petCount').textContent=`${pets.length}/3`;
+
   const addButton=document.getElementById('addPetButton');
+
   addButton.disabled=pets.length>=3;
-  addButton.textContent=pets.length>=3 ? '✓ Máximo 3 mascotas' : '＋ Agregar mascota';
+
+  addButton.textContent=
+    pets.length>=3
+      ? '✓ Máximo 3 mascotas'
+      : '＋ Agregar mascota';
 
   list.innerHTML='';
 
@@ -1528,16 +1977,23 @@ async function deletePet(id){
   }
 
   pets.forEach(pet=>{
+
     const card=document.createElement('article');
+
     card.className='pet-card';
 
     const img=document.createElement('img');
+
     img.src=pet.photo_url || 'perro-patitas.webp';
+
     img.alt='Foto de '+pet.name;
+
     card.appendChild(img);
 
     const h=document.createElement('h4');
+
     h.textContent=pet.name;
+
     card.appendChild(h);
 
     const fields=[
@@ -1549,33 +2005,51 @@ async function deletePet(id){
     ];
 
     fields.forEach(([label,value])=>{
+
       const p=document.createElement('p');
+
       p.textContent=`${label}: ${value || 'No especificado'}`;
+
       card.appendChild(p);
+
     });
 
     if(pet.info){
+
       const p=document.createElement('p');
+
       p.textContent=pet.info;
+
       card.appendChild(p);
+
     }
 
     const actions=document.createElement('div');
+
     actions.className='pet-actions';
 
     const edit=document.createElement('button');
+
     edit.className='btn btn-outline';
+
     edit.textContent='Editar';
+
     edit.onclick=()=>editPet(pet.id);
 
     const del=document.createElement('button');
+
     del.className='btn btn-outline';
+
     del.textContent='Eliminar';
+
     del.onclick=()=>deletePet(pet.id);
 
     actions.append(edit,del);
+
     card.appendChild(actions);
+
     list.appendChild(card);
+
   });
 }
 
@@ -1583,79 +2057,238 @@ async function deletePet(id){
 // MAPA DE COLOMBIA
 // =============================
 const map=L.map('map').setView([4.5709,-74.2973],5);
+
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
   maxZoom:19,
   attribution:'© OpenStreetMap'
 }).addTo(map);
 
 const cities=[
-{name:'Bogotá',lat:4.7110,lng:-74.0721,desc:'Capital de Colombia. Próximamente más lugares pet friendly.'},
-{name:'Medellín',lat:6.2442,lng:-75.5812,desc:'Ciudad de origen del proyecto Patitas Colombia.'},
-{name:'Cali',lat:3.4516,lng:-76.5320,desc:'Próximamente más lugares pet friendly en Cali.'},
-{name:'Cartagena',lat:10.3910,lng:-75.4794,desc:'Próximamente más lugares pet friendly en Cartagena.'},
-{name:'Barranquilla',lat:10.9685,lng:-74.7813,desc:'Próximamente más lugares pet friendly en Barranquilla.'},
-{name:'Bucaramanga',lat:7.1193,lng:-73.1227,desc:'Próximamente más lugares pet friendly en Bucaramanga.'},
-{name:'Pereira',lat:4.8143,lng:-75.6946,desc:'Próximamente más lugares pet friendly en Pereira.'},
-{name:'Santa Marta',lat:11.2408,lng:-74.1990,desc:'Próximamente más lugares pet friendly en Santa Marta.'}
+  {
+    name:'Bogotá',
+    lat:4.7110,
+    lng:-74.0721,
+    desc:'Capital de Colombia. Próximamente más lugares pet friendly.'
+  },
+  {
+    name:'Medellín',
+    lat:6.2442,
+    lng:-75.5812,
+    desc:'Ciudad de origen del proyecto Patitas Colombia.'
+  },
+  {
+    name:'Cali',
+    lat:3.4516,
+    lng:-76.5320,
+    desc:'Próximamente más lugares pet friendly en Cali.'
+  },
+  {
+    name:'Cartagena',
+    lat:10.3910,
+    lng:-75.4794,
+    desc:'Próximamente más lugares pet friendly en Cartagena.'
+  },
+  {
+    name:'Barranquilla',
+    lat:10.9685,
+    lng:-74.7813,
+    desc:'Próximamente más lugares pet friendly en Barranquilla.'
+  },
+  {
+    name:'Bucaramanga',
+    lat:7.1193,
+    lng:-73.1227,
+    desc:'Próximamente más lugares pet friendly en Bucaramanga.'
+  },
+  {
+    name:'Pereira',
+    lat:4.8143,
+    lng:-75.6946,
+    desc:'Próximamente más lugares pet friendly en Pereira.'
+  },
+  {
+    name:'Santa Marta',
+    lat:11.2408,
+    lng:-74.1990,
+    desc:'Próximamente más lugares pet friendly en Santa Marta.'
+  }
 ];
-cities.forEach(city=>L.marker([city.lat,city.lng]).addTo(map).bindPopup(`<strong>🐾 ${city.name}</strong><br>${city.desc}`));
+
+cities.forEach(city=>
+  L.marker([city.lat,city.lng])
+    .addTo(map)
+    .bindPopup(`<strong>🐾 ${city.name}</strong><br>${city.desc}`)
+);
 
 const places=[
-{name:'Centro Comercial Santafé Medellín',lat:6.1939,lng:-75.5730,desc:'Pet friendly. Revisa su reglamento y las zonas donde se permite el ingreso.'},
-{name:'Centro Comercial Los Molinos',lat:6.2335,lng:-75.6070,desc:'Centro comercial pet friendly.'},
-{name:'Centro Comercial El Diamante',lat:6.2640,lng:-75.5890,desc:'Se identifica como pet friendly.'},
-{name:'Pane e Pomodoro',lat:6.2398,lng:-75.5952,desc:'Pet friendly y con terraza, según la información disponible en el proyecto.'},
-{name:'La Toskana Bistró',lat:6.2070,lng:-75.5680,desc:'Cuenta con política pet friendly publicada.'},
-{name:'Clínica Veterinaria Provet',lat:6.2580,lng:-75.5920,desc:'Servicio veterinario con experiencia pet friendly.'}
+  {
+    name:'Centro Comercial Santafé Medellín',
+    lat:6.1939,
+    lng:-75.5730,
+    desc:'Pet friendly. Revisa su reglamento y las zonas donde se permite el ingreso.'
+  },
+  {
+    name:'Centro Comercial Los Molinos',
+    lat:6.2335,
+    lng:-75.6070,
+    desc:'Centro comercial pet friendly.'
+  },
+  {
+    name:'Centro Comercial El Diamante',
+    lat:6.2640,
+    lng:-75.5890,
+    desc:'Se identifica como pet friendly.'
+  },
+  {
+    name:'Pane e Pomodoro',
+    lat:6.2398,
+    lng:-75.5952,
+    desc:'Pet friendly y con terraza, según la información disponible en el proyecto.'
+  },
+  {
+    name:'La Toskana Bistró',
+    lat:6.2070,
+    lng:-75.5680,
+    desc:'Cuenta con política pet friendly publicada.'
+  },
+  {
+    name:'Clínica Veterinaria Provet',
+    lat:6.2580,
+    lng:-75.5920,
+    desc:'Servicio veterinario con experiencia pet friendly.'
+  }
 ];
-places.forEach(p=>L.marker([p.lat,p.lng]).addTo(map).bindPopup(`<strong>✓ ${p.name}</strong><br>${p.desc}`));
+
+places.forEach(p=>
+  L.marker([p.lat,p.lng])
+    .addTo(map)
+    .bindPopup(`<strong>✓ ${p.name}</strong><br>${p.desc}`)
+);
 
 // =============================
 // COMPRA SIMULADA
 // =============================
 function openPurchase(plan){
+
   selectedPlan=plan;
-  document.getElementById('purchaseTitle').textContent=plan==='mensual'?'Patitas Mensual':'Patitas Anual';
-  document.getElementById('purchasePrice').innerHTML=plan==='mensual'?'<strong>$20.000 / mes</strong>':'<strong>$180.000 / año</strong>';
+
+  document.getElementById('purchaseTitle').textContent=
+    plan==='mensual'
+      ? 'Patitas Mensual'
+      : 'Patitas Anual';
+
+  document.getElementById('purchasePrice').innerHTML=
+    plan==='mensual'
+      ? '<strong>$20.000 / mes</strong>'
+      : '<strong>$180.000 / año</strong>';
+
   document.getElementById('purchaseModal').style.display='flex';
 }
-function closePurchase(){document.getElementById('purchaseModal').style.display='none';}
+
+function closePurchase(){
+  document.getElementById('purchaseModal').style.display='none';
+}
+
 function completePurchase(){
-  document.getElementById('successPlan').textContent=selectedPlan==='mensual'?'Patitas Mensual':'Patitas Anual';
-  document.getElementById('successPrice').textContent=selectedPlan==='mensual'?'$20.000 / mes':'$180.000 / año';
-  document.getElementById('successValidity').textContent=selectedPlan==='mensual'?'1 mes':'1 año';
-  document.getElementById('successPromo').textContent=selectedPlan==='mensual'?'Promoción: 1 mes gratis y posteriormente 2 meses con 50% de descuento.':'Precio promocional aplicado.';
-  document.getElementById('successCode').textContent='PAT-'+Math.random().toString(36).substring(2,8).toUpperCase();
+
+  document.getElementById('successPlan').textContent=
+    selectedPlan==='mensual'
+      ? 'Patitas Mensual'
+      : 'Patitas Anual';
+
+  document.getElementById('successPrice').textContent=
+    selectedPlan==='mensual'
+      ? '$20.000 / mes'
+      : '$180.000 / año';
+
+  document.getElementById('successValidity').textContent=
+    selectedPlan==='mensual'
+      ? '1 mes'
+      : '1 año';
+
+  document.getElementById('successPromo').textContent=
+    selectedPlan==='mensual'
+      ? 'Promoción: 1 mes gratis y posteriormente 2 meses con 50% de descuento.'
+      : 'Precio promocional aplicado.';
+
+  document.getElementById('successCode').textContent=
+    'PAT-'+Math.random().toString(36).substring(2,8).toUpperCase();
+
   closePurchase();
+
   document.getElementById('successModal').style.display='flex';
 }
-function closeSuccess(){document.getElementById('successModal').style.display='none';}
 
-supabaseClient.auth.onAuthStateChange((_event, session)=>{
+function closeSuccess(){
+  document.getElementById('successModal').style.display='none';
+}
+
+supabaseClient.auth.onAuthStateChange((event, session)=>{
+
   updateHeader();
-  if(session && document.getElementById('accountModal').style.display==='flex'){
+
+  if(event==='PASSWORD_RECOVERY'){
+
+    recoveryMode=true;
+
+    document.getElementById('resetModal').style.display='flex';
+
+    document.getElementById('resetTitle').textContent='🔐 Nueva contraseña';
+
+    document.getElementById('resetRequestView').style.display='none';
+
+    document.getElementById('resetPasswordView').style.display='block';
+
+    document.getElementById('resetMessage').textContent='';
+  }
+
+  if(
+    session &&
+    document.getElementById('accountModal').style.display==='flex'
+  ){
     loadAccount();
   }
+
 });
 
 window.addEventListener('load',async()=>{
+
   await updateHeader();
-  setTimeout(()=>map.invalidateSize(),200);
+
+  setTimeout(()=>{
+    map.invalidateSize();
+  },200);
+
 });
 
 window.addEventListener('click',function(event){
+
   const loginModal=document.getElementById('loginModal');
   const accountModal=document.getElementById('accountModal');
   const purchaseModal=document.getElementById('purchaseModal');
   const successModal=document.getElementById('successModal');
+  const resetModal=document.getElementById('resetModal');
 
-  if(event.target===loginModal) closeModal();
-  if(event.target===accountModal) closeAccount();
-  if(event.target===purchaseModal) closePurchase();
-  if(event.target===successModal) closeSuccess();
+  if(event.target===loginModal)
+    closeModal();
+
+  if(event.target===accountModal)
+    closeAccount();
+
+  if(event.target===purchaseModal)
+    closePurchase();
+
+  if(event.target===successModal)
+    closeSuccess();
+
+  if(event.target===resetModal)
+    closeResetModal();
+
 });
-</script>
 
+</script>
 
 </body>
 </html>
+  }
+}
