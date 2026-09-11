@@ -1247,5 +1247,253 @@ places.forEach(p => {
 // =============================
 
 function openModal(){
+  document.getElementById('loginModal').style.display = 'flex';
+}
 
-  docume
+function closeModal(){
+  document.getElementById('loginModal').style.display = 'none';
+}
+
+function toggleAuthMode(){
+  if(authMode === 'login'){
+    authMode = 'register';
+
+    document.getElementById('authTitle').textContent = 'Crear cuenta';
+    document.getElementById('authButton').textContent = 'Crear cuenta';
+    document.getElementById('authSwitch').textContent = 'Ya tengo una cuenta';
+    document.getElementById('authNameWrap').style.display = 'block';
+  }else{
+    authMode = 'login';
+
+    document.getElementById('authTitle').textContent = 'Iniciar sesión';
+    document.getElementById('authButton').textContent = 'Entrar';
+    document.getElementById('authSwitch').textContent = 'Crear cuenta';
+    document.getElementById('authNameWrap').style.display = 'none';
+  }
+
+  document.getElementById('authMessage').textContent = '';
+}
+
+async function handleAuth(){
+
+  const email =
+    document.getElementById('authEmail').value.trim();
+
+  const password =
+    document.getElementById('authPassword').value;
+
+  const message =
+    document.getElementById('authMessage');
+
+  if(!supabaseClient){
+    message.textContent =
+      'Error: Supabase no está configurado.';
+    return;
+  }
+
+  if(!email || !password){
+    message.textContent =
+      'Escribe tu correo y contraseña.';
+    return;
+  }
+
+  message.textContent = 'Procesando...';
+
+  try{
+
+    if(authMode === 'login'){
+
+      const { data, error } =
+        await supabaseClient.auth.signInWithPassword({
+          email,
+          password
+        });
+
+      if(error) throw error;
+
+      message.textContent =
+        '¡Inicio de sesión exitoso!';
+
+      setTimeout(() => {
+        closeModal();
+      }, 1200);
+
+    }else{
+
+      const name =
+        document.getElementById('authName').value.trim();
+
+      if(!name){
+        message.textContent =
+          'Escribe tu nombre.';
+        return;
+      }
+
+      const { data, error } =
+        await supabaseClient.auth.signUp({
+          email,
+          password,
+          options:{
+            data:{
+              name:name
+            }
+          }
+        });
+
+      if(error) throw error;
+
+      message.textContent =
+        'Cuenta creada. Revisa tu correo si Supabase solicita confirmación.';
+
+    }
+
+  }catch(error){
+
+    message.textContent =
+      'Error: ' + error.message;
+  }
+}
+
+
+// =============================
+// COMPRA SIMULADA
+// =============================
+
+let selectedPlan = '';
+
+function openPurchase(plan){
+
+  selectedPlan = plan;
+
+  const title =
+    document.getElementById('purchaseTitle');
+
+  const price =
+    document.getElementById('purchasePrice');
+
+  if(plan === 'mensual'){
+
+    title.textContent =
+      'Patitas Mensual';
+
+    price.innerHTML =
+      '<strong>$20.000 / mes</strong>';
+
+  }else{
+
+    title.textContent =
+      'Patitas Anual';
+
+    price.innerHTML =
+      '<strong>$180.000 / año</strong>';
+  }
+
+  document.getElementById('purchaseModal')
+    .style.display = 'flex';
+}
+
+function closePurchase(){
+
+  document.getElementById('purchaseModal')
+    .style.display = 'none';
+}
+
+function completePurchase(){
+
+  const plan =
+    document.getElementById('successPlan');
+
+  const price =
+    document.getElementById('successPrice');
+
+  const validity =
+    document.getElementById('successValidity');
+
+  const code =
+    document.getElementById('successCode');
+
+  const promo =
+    document.getElementById('successPromo');
+
+  if(selectedPlan === 'mensual'){
+
+    plan.textContent =
+      'Patitas Mensual';
+
+    price.textContent =
+      '$20.000 / mes';
+
+    validity.textContent =
+      '1 mes';
+
+    promo.textContent =
+      'Promoción: 1 mes gratis y posteriormente 2 meses con 50% de descuento.';
+
+  }else{
+
+    plan.textContent =
+      'Patitas Anual';
+
+    price.textContent =
+      '$180.000 / año';
+
+    validity.textContent =
+      '1 año';
+
+    promo.textContent =
+      'Precio promocional aplicado.';
+  }
+
+  code.textContent =
+    'PAT-' +
+    Math.random()
+      .toString(36)
+      .substring(2,8)
+      .toUpperCase();
+
+  closePurchase();
+
+  document.getElementById('successModal')
+    .style.display = 'flex';
+}
+
+function closeSuccess(){
+
+  document.getElementById('successModal')
+    .style.display = 'none';
+}
+
+
+// =============================
+// CERRAR MODALES AL HACER CLIC AFUERA
+// =============================
+
+window.addEventListener('click', function(event){
+
+  const loginModal =
+    document.getElementById('loginModal');
+
+  const purchaseModal =
+    document.getElementById('purchaseModal');
+
+  const successModal =
+    document.getElementById('successModal');
+
+  if(event.target === loginModal){
+    closeModal();
+  }
+
+  if(event.target === purchaseModal){
+    closePurchase();
+  }
+
+  if(event.target === successModal){
+    closeSuccess();
+  }
+
+});
+</script>
+
+</body>
+</html>
+  
