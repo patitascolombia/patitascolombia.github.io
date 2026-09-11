@@ -312,6 +312,64 @@ footer{
     height:420px
   }
 }
+
+.hero-dog{
+  width:100%;
+  height:100%;
+  min-height:300px;
+  object-fit:cover;
+  border-radius:24px;
+  display:block;
+}
+
+.account-pets{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;
+  margin-top:16px;
+}
+
+.pet-card{
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:12px;
+  background:#fff;
+}
+
+.pet-card img{
+  width:100%;
+  height:150px;
+  object-fit:cover;
+  border-radius:12px;
+  display:block;
+  margin-bottom:10px;
+}
+
+.pet-card h4{margin:4px 0 7px}
+.pet-card p{margin:4px 0;font-size:14px;color:var(--muted)}
+.pet-actions{display:flex;gap:8px;margin-top:10px}
+.pet-actions button{flex:1}
+
+.account-profile{
+  background:var(--light);
+  border-radius:16px;
+  padding:15px;
+  margin:14px 0;
+}
+
+.pet-form{
+  display:none;
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:15px;
+  margin-top:15px;
+}
+
+@media(max-width:800px){
+  .account-pets{grid-template-columns:1fr}
+  .hero-dog{min-height:260px}
+}
+
 </style>
 </head>
 
@@ -370,9 +428,7 @@ footer{
   </div>
 
   <div class="hero-card">
-    <div class="paw-art">
-      🐶🐾🇨🇴
-    </div>
+    <img src="perro-patitas.webp" alt="Perro de Patitas Colombia" class="hero-dog">
   </div>
 
 </section>
@@ -778,95 +834,95 @@ footer{
 </footer>
 
 
-<!-- LOGIN -->
+<!-- LOGIN / CUENTA -->
 <div class="modal" id="loginModal">
-
   <div class="modal-box">
+    <button class="close" onclick="closeModal()">×</button>
 
-    <button
-      class="close"
-      onclick="closeModal()">
-      ×
-    </button>
+    <h2 id="authTitle">Iniciar sesión</h2>
 
-    <h2 id="authTitle">
-      Iniciar sesión
-    </h2>
-
-    <div
-      id="authNameWrap"
-      style="display:none">
-
-      <label>
-        Nombre
-      </label>
-
-      <input
-        id="authName"
-        type="text"
-        placeholder="Tu nombre">
-
+    <div id="authNameWrap" style="display:none">
+      <label>Nombre</label>
+      <input id="authName" type="text" placeholder="Tu nombre" autocomplete="name">
     </div>
 
+    <label>Correo</label>
+    <input id="authEmail" type="email" placeholder="tu@email.com" autocomplete="email">
 
-    <label>
-      Correo
-    </label>
+    <label>Contraseña</label>
+    <input id="authPassword" type="password" placeholder="••••••••" autocomplete="current-password">
 
-    <input
-      id="authEmail"
-      type="email"
-      placeholder="tu@email.com"
-      autocomplete="email">
+    <button id="authButton" class="btn btn-primary" style="width:100%" onclick="handleAuth()">Entrar</button>
 
+    <button id="authSwitch" class="btn btn-outline" style="width:100%;margin-top:10px" onclick="toggleAuthMode()">Crear cuenta</button>
 
-    <label>
-      Contraseña
-    </label>
-
-    <input
-      id="authPassword"
-      type="password"
-      placeholder="••••••••"
-      autocomplete="current-password">
-
-
-    <button
-      id="authButton"
-      class="btn btn-primary"
-      style="width:100%"
-      onclick="handleAuth()">
-
-      Entrar
-
-    </button>
-
-
-    <button
-      id="authSwitch"
-      class="btn btn-outline"
-      style="width:100%;margin-top:10px"
-      onclick="toggleAuthMode()">
-
-      Crear cuenta
-
-    </button>
-
-
-    <p
-      id="authMessage"
-      class="notice"
-      style="margin-top:12px">
-    </p>
-
-    <p class="notice">
-      La contraseña se gestiona mediante Supabase Auth.
-    </p>
-
+    <p id="authMessage" class="notice" style="margin-top:12px"></p>
+    <p class="notice">Tu cuenta y tus mascotas se guardan en Supabase.</p>
   </div>
-
 </div>
 
+<div class="modal" id="accountModal">
+  <div class="modal-box">
+    <button class="close" onclick="closeAccount()">×</button>
+    <h2>🐾 Mi cuenta</h2>
+
+    <div class="account-profile">
+      <strong id="accountName">—</strong>
+      <p id="accountEmail">—</p>
+      <button class="btn btn-outline" onclick="logout()">Cerrar sesión</button>
+    </div>
+
+    <h3>🐶 Mis mascotas <span id="petCount">0/3</span></h3>
+    <p class="notice">Puedes registrar hasta 3 mascotas. La información se guarda en tu cuenta de Supabase.</p>
+
+    <div id="petsList" class="account-pets"></div>
+
+    <button id="addPetButton" class="btn btn-primary" style="width:100%;margin-top:15px" onclick="showPetForm()">＋ Agregar mascota</button>
+
+    <div id="petForm" class="pet-form">
+      <h3 id="petFormTitle">Nueva mascota</h3>
+      <input id="petId" type="hidden">
+
+      <label>Foto</label>
+      <input id="petPhoto" type="file" accept="image/*">
+
+      <label>Nombre</label>
+      <input id="petName" type="text" placeholder="Ej. Luna">
+
+      <label>Especie</label>
+      <select id="petSpecies">
+        <option>Perro</option>
+        <option>Gato</option>
+        <option>Otro</option>
+      </select>
+
+      <label>Raza</label>
+      <input id="petBreed" type="text" placeholder="Ej. Labrador">
+
+      <label>Edad</label>
+      <input id="petAge" type="text" placeholder="Ej. 2 años">
+
+      <label>Sexo</label>
+      <select id="petSex">
+        <option>Hembra</option>
+        <option>Macho</option>
+        <option>No especificado</option>
+      </select>
+
+      <label>Color</label>
+      <input id="petColor" type="text" placeholder="Ej. Negro">
+
+      <label>Información adicional</label>
+      <textarea id="petInfo" rows="3" placeholder="Cuidados, gustos o información importante"></textarea>
+
+      <div style="display:flex;gap:10px;margin-top:10px">
+        <button class="btn btn-primary" style="flex:1" onclick="savePet()">Guardar mascota</button>
+        <button class="btn btn-outline" style="flex:1" onclick="hidePetForm()">Cancelar</button>
+      </div>
+      <p id="petMessage" class="notice" style="margin-top:10px"></p>
+    </div>
+  </div>
+</div>
 
 <!-- PAGO -->
 <div class="modal" id="successModal">
@@ -1037,463 +1093,569 @@ footer{
   </div>
 
 </div>
-
-
 <!-- SCRIPTS -->
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
-
 // =============================
-// SUPABASE
+// SUPABASE + AUTENTICACIÓN
 // =============================
-
 const SUPABASE_URL = 'https://hiizyaoferdwebnymvpg.supabase.co';
-
 const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_XOe_ZspIakCkMItNFWuLpQ_v_iBA-OI';
 
-let supabaseClient = null;
+const supabaseClient = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_PUBLISHABLE_KEY
+);
 
 let authMode = 'login';
+let selectedPlan = '';
 
-
-if(
-  SUPABASE_URL.startsWith('https://') &&
-  SUPABASE_PUBLISHABLE_KEY.startsWith('sb_')
-){
-
-  supabaseClient =
-    window.supabase.createClient(
-      SUPABASE_URL,
-      SUPABASE_PUBLISHABLE_KEY
-    );
-
+function friendlyAuthError(error){
+  const msg = (error?.message || '').toLowerCase();
+  if(msg.includes('invalid login credentials')) return 'Correo o contraseña incorrectos.';
+  if(msg.includes('user already registered')) return 'Ya existe una cuenta con ese correo.';
+  if(msg.includes('email not confirmed')) return 'Debes confirmar tu correo antes de iniciar sesión.';
+  if(msg.includes('password should be at least')) return 'La contraseña debe tener al menos 6 caracteres.';
+  if(msg.includes('rate limit')) return 'Demasiados intentos. Espera un momento y vuelve a intentar.';
+  return error?.message || 'Ocurrió un error. Inténtalo de nuevo.';
 }
 
+async function getCurrentUser(){
+  const { data, error } = await supabaseClient.auth.getUser();
+  if(error) return null;
+  return data.user || null;
+}
+
+async function openModal(){
+  const user = await getCurrentUser();
+  if(user){
+    openAccount();
+    return;
+  }
+  document.getElementById('loginModal').style.display='flex';
+}
+
+function closeModal(){
+  document.getElementById('loginModal').style.display='none';
+  document.getElementById('authMessage').textContent='';
+}
+
+function openAccount(){
+  document.getElementById('accountModal').style.display='flex';
+  loadAccount();
+}
+
+function closeAccount(){
+  document.getElementById('accountModal').style.display='none';
+  hidePetForm();
+}
+
+function toggleAuthMode(){
+  if(authMode==='login'){
+    authMode='register';
+    document.getElementById('authTitle').textContent='Crear cuenta';
+    document.getElementById('authButton').textContent='Crear cuenta';
+    document.getElementById('authSwitch').textContent='Ya tengo una cuenta';
+    document.getElementById('authNameWrap').style.display='block';
+  }else{
+    authMode='login';
+    document.getElementById('authTitle').textContent='Iniciar sesión';
+    document.getElementById('authButton').textContent='Entrar';
+    document.getElementById('authSwitch').textContent='Crear cuenta';
+    document.getElementById('authNameWrap').style.display='none';
+  }
+  document.getElementById('authMessage').textContent='';
+}
+
+async function handleAuth(){
+  const name=document.getElementById('authName').value.trim();
+  const email=document.getElementById('authEmail').value.trim().toLowerCase();
+  const password=document.getElementById('authPassword').value;
+  const message=document.getElementById('authMessage');
+
+  if(!email || !password){
+    message.textContent='Escribe tu correo y contraseña.';
+    return;
+  }
+  if(password.length<6){
+    message.textContent='La contraseña debe tener al menos 6 caracteres.';
+    return;
+  }
+
+  message.textContent='Procesando...';
+
+  try{
+    if(authMode==='register'){
+      if(!name){
+        message.textContent='Escribe tu nombre.';
+        return;
+      }
+
+      const { data, error } = await supabaseClient.auth.signUp({
+        email,
+        password,
+        options:{
+          data:{ name }
+        }
+      });
+
+      if(error) throw error;
+
+      if(data.session){
+        message.textContent='¡Cuenta creada!';
+        setTimeout(()=>{ closeModal(); updateHeader(); openAccount(); },400);
+      }else{
+        message.textContent='¡Cuenta creada! Revisa tu correo para confirmar la cuenta.';
+      }
+    }else{
+      const { error } = await supabaseClient.auth.signInWithPassword({
+        email,
+        password
+      });
+
+      if(error) throw error;
+
+      message.textContent='¡Inicio de sesión exitoso!';
+      setTimeout(()=>{ closeModal(); updateHeader(); openAccount(); },300);
+    }
+  }catch(error){
+    message.textContent=friendlyAuthError(error);
+  }
+}
+
+async function logout(){
+  await supabaseClient.auth.signOut();
+  closeAccount();
+  updateHeader();
+}
+
+async function updateHeader(){
+  const button=document.querySelector('header nav .btn-primary');
+  if(!button) return;
+  const user=await getCurrentUser();
+  button.textContent=user ? '👤 Mi cuenta' : 'Iniciar sesión';
+}
+
+async function loadAccount(){
+  const user=await getCurrentUser();
+  if(!user){
+    closeAccount();
+    updateHeader();
+    return;
+  }
+
+  const name=user.user_metadata?.name || 'Usuario';
+  document.getElementById('accountName').textContent=name;
+  document.getElementById('accountEmail').textContent=user.email || '';
+  await renderPets();
+}
+
+async function showPetForm(){
+  const user=await getCurrentUser();
+  if(!user) return;
+
+  const { count, error } = await supabaseClient
+    .from('pets')
+    .select('id', { count:'exact', head:true })
+    .eq('user_id', user.id);
+
+  if(error){
+    document.getElementById('petMessage').textContent='No se pudieron cargar tus mascotas.';
+    return;
+  }
+
+  if((count || 0)>=3){
+    document.getElementById('petMessage').textContent='Solo puedes tener 3 mascotas.';
+    return;
+  }
+
+  clearPetForm();
+  document.getElementById('petForm').style.display='block';
+}
+
+function hidePetForm(){
+  const form=document.getElementById('petForm');
+  if(form) form.style.display='none';
+}
+
+function clearPetForm(){
+  ['petId','petName','petBreed','petAge','petColor','petInfo'].forEach(id=>{
+    document.getElementById(id).value='';
+  });
+  document.getElementById('petSpecies').value='Perro';
+  document.getElementById('petSex').value='No especificado';
+  document.getElementById('petPhoto').value='';
+  document.getElementById('petFormTitle').textContent='Nueva mascota';
+  document.getElementById('petMessage').textContent='';
+}
+
+async function editPet(id){
+  const { data, error } = await supabaseClient
+    .from('pets')
+    .select('*')
+    .eq('id', id)
+    .single();
+
+  if(error || !data){
+    alert('No se pudo cargar la mascota.');
+    return;
+  }
+
+  document.getElementById('petId').value=data.id;
+  document.getElementById('petName').value=data.name || '';
+  document.getElementById('petSpecies').value=data.species || 'Perro';
+  document.getElementById('petBreed').value=data.breed || '';
+  document.getElementById('petAge').value=data.age || '';
+  document.getElementById('petSex').value=data.sex || 'No especificado';
+  document.getElementById('petColor').value=data.color || '';
+  document.getElementById('petInfo').value=data.info || '';
+  document.getElementById('petPhoto').value='';
+  document.getElementById('petFormTitle').textContent='Editar mascota';
+  document.getElementById('petMessage').textContent='Si no eliges otra foto, se conserva la actual.';
+  document.getElementById('petForm').style.display='block';
+}
+
+function readPhoto(file){
+  return new Promise((resolve,reject)=>{
+    if(!file){ resolve(null); return; }
+
+    const reader=new FileReader();
+    reader.onload=()=>{
+      const img=new Image();
+      img.onload=()=>{
+        const max=1000;
+        const scale=Math.min(1,max/Math.max(img.width,img.height));
+        const canvas=document.createElement('canvas');
+        canvas.width=Math.max(1,Math.round(img.width*scale));
+        canvas.height=Math.max(1,Math.round(img.height*scale));
+        const ctx=canvas.getContext('2d');
+        ctx.drawImage(img,0,0,canvas.width,canvas.height);
+        canvas.toBlob(
+          blob=>{
+            if(!blob) return reject(new Error('No se pudo preparar la foto.'));
+            resolve(blob);
+          },
+          'image/jpeg',
+          0.82
+        );
+      };
+      img.onerror=()=>reject(new Error('No se pudo leer la imagen.'));
+      img.src=reader.result;
+    };
+    reader.onerror=()=>reject(new Error('No se pudo cargar la foto.'));
+    reader.readAsDataURL(file);
+  });
+}
+
+async function uploadPetPhoto(userId, file){
+  const blob=await readPhoto(file);
+  if(!blob) return null;
+
+  const path=`${userId}/${crypto.randomUUID()}.jpg`;
+
+  const { error } = await supabaseClient.storage
+    .from('pet-photos')
+    .upload(path, blob, {
+      contentType:'image/jpeg',
+      upsert:false
+    });
+
+  if(error) throw error;
+
+  const { data } = supabaseClient.storage
+    .from('pet-photos')
+    .getPublicUrl(path);
+
+  return { url:data.publicUrl, path };
+}
+
+async function savePet(){
+  const user=await getCurrentUser();
+  const message=document.getElementById('petMessage');
+
+  if(!user){
+    message.textContent='Debes iniciar sesión.';
+    return;
+  }
+
+  const name=document.getElementById('petName').value.trim();
+  if(!name){
+    message.textContent='Escribe el nombre de tu mascota.';
+    return;
+  }
+
+  const id=document.getElementById('petId').value;
+  const isEdit=!!id;
+  message.textContent='Guardando...';
+
+  try{
+    if(!isEdit){
+      const { count } = await supabaseClient
+        .from('pets')
+        .select('id', { count:'exact', head:true })
+        .eq('user_id', user.id);
+
+      if((count || 0)>=3){
+        message.textContent='Solo puedes tener 3 mascotas.';
+        return;
+      }
+    }
+
+    let photoUrl=null;
+    let photoPath=null;
+    const file=document.getElementById('petPhoto').files[0];
+
+    if(file){
+      const uploaded=await uploadPetPhoto(user.id,file);
+      photoUrl=uploaded.url;
+      photoPath=uploaded.path;
+    }
+
+    const petData={
+      name,
+      species:document.getElementById('petSpecies').value,
+      breed:document.getElementById('petBreed').value.trim(),
+      age:document.getElementById('petAge').value.trim(),
+      sex:document.getElementById('petSex').value,
+      color:document.getElementById('petColor').value.trim(),
+      info:document.getElementById('petInfo').value.trim()
+    };
+
+    if(isEdit){
+      if(photoUrl){
+        petData.photo_url=photoUrl;
+        petData.photo_path=photoPath;
+      }
+
+      const { error } = await supabaseClient
+        .from('pets')
+        .update(petData)
+        .eq('id', id)
+        .eq('user_id', user.id);
+
+      if(error) throw error;
+    }else{
+      petData.user_id=user.id;
+      if(photoUrl){
+        petData.photo_url=photoUrl;
+        petData.photo_path=photoPath;
+      }
+
+      const { error } = await supabaseClient
+        .from('pets')
+        .insert(petData);
+
+      if(error) throw error;
+    }
+
+    message.textContent='Mascota guardada correctamente.';
+    await renderPets();
+    setTimeout(hidePetForm,500);
+  }catch(error){
+    console.error(error);
+    message.textContent='No se pudo guardar. Revisa la configuración de Supabase.';
+  }
+}
+
+async function deletePet(id){
+  if(!confirm('¿Eliminar esta mascota?')) return;
+
+  const user=await getCurrentUser();
+  if(!user) return;
+
+  try{
+    const { data:pet } = await supabaseClient
+      .from('pets')
+      .select('photo_path')
+      .eq('id', id)
+      .eq('user_id', user.id)
+      .single();
+
+    const { error } = await supabaseClient
+      .from('pets')
+      .delete()
+      .eq('id', id)
+      .eq('user_id', user.id);
+
+    if(error) throw error;
+
+    if(pet?.photo_path){
+      await supabaseClient.storage
+        .from('pet-photos')
+        .remove([pet.photo_path]);
+    }
+
+    await renderPets();
+  }catch(error){
+    console.error(error);
+    alert('No se pudo eliminar la mascota.');
+  }
+}
+  async function renderPets(){
+  const list=document.getElementById('petsList');
+  list.innerHTML='<p class="notice">Cargando mascotas...</p>';
+
+  const user=await getCurrentUser();
+  if(!user){
+    list.innerHTML='';
+    return;
+  }
+
+  const { data:pets, error } = await supabaseClient
+    .from('pets')
+    .select('id,name,species,breed,age,sex,color,info,photo_url')
+    .eq('user_id', user.id)
+    .order('created_at', { ascending:true });
+
+  if(error){
+    console.error(error);
+    list.innerHTML='<p class="notice">No se pudieron cargar las mascotas. Revisa la tabla "pets" y sus políticas RLS.</p>';
+    return;
+  }
+
+  document.getElementById('petCount').textContent=`${pets.length}/3`;
+  const addButton=document.getElementById('addPetButton');
+  addButton.disabled=pets.length>=3;
+  addButton.textContent=pets.length>=3 ? '✓ Máximo 3 mascotas' : '＋ Agregar mascota';
+
+  list.innerHTML='';
+
+  if(!pets.length){
+    list.innerHTML='<p class="notice">Todavía no tienes mascotas registradas.</p>';
+    return;
+  }
+
+  pets.forEach(pet=>{
+    const card=document.createElement('article');
+    card.className='pet-card';
+
+    const img=document.createElement('img');
+    img.src=pet.photo_url || 'perro-patitas.webp';
+    img.alt='Foto de '+pet.name;
+    card.appendChild(img);
+
+    const h=document.createElement('h4');
+    h.textContent=pet.name;
+    card.appendChild(h);
+
+    const fields=[
+      ['Especie',pet.species],
+      ['Raza',pet.breed],
+      ['Edad',pet.age],
+      ['Sexo',pet.sex],
+      ['Color',pet.color]
+    ];
+
+    fields.forEach(([label,value])=>{
+      const p=document.createElement('p');
+      p.textContent=`${label}: ${value || 'No especificado'}`;
+      card.appendChild(p);
+    });
+
+    if(pet.info){
+      const p=document.createElement('p');
+      p.textContent=pet.info;
+      card.appendChild(p);
+    }
+
+    const actions=document.createElement('div');
+    actions.className='pet-actions';
+
+    const edit=document.createElement('button');
+    edit.className='btn btn-outline';
+    edit.textContent='Editar';
+    edit.onclick=()=>editPet(pet.id);
+
+    const del=document.createElement('button');
+    del.className='btn btn-outline';
+    del.textContent='Eliminar';
+    del.onclick=()=>deletePet(pet.id);
+
+    actions.append(edit,del);
+    card.appendChild(actions);
+    list.appendChild(card);
+  });
+}
 
 // =============================
 // MAPA DE COLOMBIA
 // =============================
+const map=L.map('map').setView([4.5709,-74.2973],5);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
+  maxZoom:19,
+  attribution:'© OpenStreetMap'
+}).addTo(map);
 
-
-const map =
-  L.map('map').setView(
-    [4.5709,-74.2973],
-    5
-  );
-
-
-L.tileLayer(
-  'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-  {
-    maxZoom:19,
-    attribution:'© OpenStreetMap'
-  }
-).addTo(map);
-
-
-// =============================
-// CIUDADES DE COLOMBIA
-// =============================
-
-const cities = [
-
-  {
-    name:'Bogotá',
-    lat:4.7110,
-    lng:-74.0721,
-    desc:'Capital de Colombia. Próximamente más lugares pet friendly.'
-  },
-
-  {
-    name:'Medellín',
-    lat:6.2442,
-    lng:-75.5812,
-    desc:'Ciudad de origen del proyecto Patitas Colombia.'
-  },
-
-  {
-    name:'Cali',
-    lat:3.4516,
-    lng:-76.5320,
-    desc:'Próximamente más lugares pet friendly en Cali.'
-  },
-
-  {
-    name:'Cartagena',
-    lat:10.3910,
-    lng:-75.4794,
-    desc:'Próximamente más lugares pet friendly en Cartagena.'
-  },
-
-  {
-    name:'Barranquilla',
-    lat:10.9685,
-    lng:-74.7813,
-    desc:'Próximamente más lugares pet friendly en Barranquilla.'
-  },
-
-  {
-    name:'Bucaramanga',
-    lat:7.1193,
-    lng:-73.1227,
-    desc:'Próximamente más lugares pet friendly en Bucaramanga.'
-  },
-
-  {
-    name:'Pereira',
-    lat:4.8143,
-    lng:-75.6946,
-    desc:'Próximamente más lugares pet friendly en Pereira.'
-  },
-
-  {
-    name:'Santa Marta',
-    lat:11.2408,
-    lng:-74.1990,
-    desc:'Próximamente más lugares pet friendly en Santa Marta.'
-  }
-
+const cities=[
+{name:'Bogotá',lat:4.7110,lng:-74.0721,desc:'Capital de Colombia. Próximamente más lugares pet friendly.'},
+{name:'Medellín',lat:6.2442,lng:-75.5812,desc:'Ciudad de origen del proyecto Patitas Colombia.'},
+{name:'Cali',lat:3.4516,lng:-76.5320,desc:'Próximamente más lugares pet friendly en Cali.'},
+{name:'Cartagena',lat:10.3910,lng:-75.4794,desc:'Próximamente más lugares pet friendly en Cartagena.'},
+{name:'Barranquilla',lat:10.9685,lng:-74.7813,desc:'Próximamente más lugares pet friendly en Barranquilla.'},
+{name:'Bucaramanga',lat:7.1193,lng:-73.1227,desc:'Próximamente más lugares pet friendly en Bucaramanga.'},
+{name:'Pereira',lat:4.8143,lng:-75.6946,desc:'Próximamente más lugares pet friendly en Pereira.'},
+{name:'Santa Marta',lat:11.2408,lng:-74.1990,desc:'Próximamente más lugares pet friendly en Santa Marta.'}
 ];
+cities.forEach(city=>L.marker([city.lat,city.lng]).addTo(map).bindPopup(`<strong>🐾 ${city.name}</strong><br>${city.desc}`));
 
-
-cities.forEach(city => {
-
-  L.marker([
-    city.lat,
-    city.lng
-  ])
-  .addTo(map)
-  .bindPopup(`
-    <strong>🐾 ${city.name}</strong>
-    <br>
-    ${city.desc}
-  `);
-
-});
-
-
-// =============================
-// LUGARES DE MEDELLÍN
-// =============================
-
-const places = [
-
-  {
-    name:'Centro Comercial Santafé Medellín',
-    lat:6.1939,
-    lng:-75.5730,
-    desc:'Pet friendly. Revisa su reglamento y las zonas donde se permite el ingreso.'
-  },
-
-  {
-    name:'Centro Comercial Los Molinos',
-    lat:6.2335,
-    lng:-75.6070,
-    desc:'Centro comercial pet friendly.'
-  },
-
-  {
-    name:'Centro Comercial El Diamante',
-    lat:6.2640,
-    lng:-75.5890,
-    desc:'Se identifica como pet friendly.'
-  },
-
-  {
-    name:'Pane e Pomodoro',
-    lat:6.2398,
-    lng:-75.5952,
-    desc:'Pet friendly y con terraza, según la información disponible en el proyecto.'
-  },
-
-  {
-    name:'La Toskana Bistró',
-    lat:6.2070,
-    lng:-75.5680,
-    desc:'Cuenta con política pet friendly publicada.'
-  },
-
-  {
-    name:'Clínica Veterinaria Provet',
-    lat:6.2580,
-    lng:-75.5920,
-    desc:'Servicio veterinario con experiencia pet friendly.'
-  }
-
+const places=[
+{name:'Centro Comercial Santafé Medellín',lat:6.1939,lng:-75.5730,desc:'Pet friendly. Revisa su reglamento y las zonas donde se permite el ingreso.'},
+{name:'Centro Comercial Los Molinos',lat:6.2335,lng:-75.6070,desc:'Centro comercial pet friendly.'},
+{name:'Centro Comercial El Diamante',lat:6.2640,lng:-75.5890,desc:'Se identifica como pet friendly.'},
+{name:'Pane e Pomodoro',lat:6.2398,lng:-75.5952,desc:'Pet friendly y con terraza, según la información disponible en el proyecto.'},
+{name:'La Toskana Bistró',lat:6.2070,lng:-75.5680,desc:'Cuenta con política pet friendly publicada.'},
+{name:'Clínica Veterinaria Provet',lat:6.2580,lng:-75.5920,desc:'Servicio veterinario con experiencia pet friendly.'}
 ];
-
-
-places.forEach(p => {
-
-  L.marker([
-    p.lat,
-    p.lng
-  ])
-  .addTo(map)
-  .bindPopup(`
-    <strong>✓ ${p.name}</strong>
-    <br>
-    ${p.desc}
-  `);
-
-});
-
-
-// =============================
-// LOGIN
-// =============================
-
-function openModal(){
-  document.getElementById('loginModal').style.display = 'flex';
-}
-
-function closeModal(){
-  document.getElementById('loginModal').style.display = 'none';
-}
-
-function toggleAuthMode(){
-  if(authMode === 'login'){
-    authMode = 'register';
-
-    document.getElementById('authTitle').textContent = 'Crear cuenta';
-    document.getElementById('authButton').textContent = 'Crear cuenta';
-    document.getElementById('authSwitch').textContent = 'Ya tengo una cuenta';
-    document.getElementById('authNameWrap').style.display = 'block';
-  }else{
-    authMode = 'login';
-
-    document.getElementById('authTitle').textContent = 'Iniciar sesión';
-    document.getElementById('authButton').textContent = 'Entrar';
-    document.getElementById('authSwitch').textContent = 'Crear cuenta';
-    document.getElementById('authNameWrap').style.display = 'none';
-  }
-
-  document.getElementById('authMessage').textContent = '';
-}
-
-async function handleAuth(){
-
-  const email =
-    document.getElementById('authEmail').value.trim();
-
-  const password =
-    document.getElementById('authPassword').value;
-
-  const message =
-    document.getElementById('authMessage');
-
-  if(!supabaseClient){
-    message.textContent =
-      'Error: Supabase no está configurado.';
-    return;
-  }
-
-  if(!email || !password){
-    message.textContent =
-      'Escribe tu correo y contraseña.';
-    return;
-  }
-
-  message.textContent = 'Procesando...';
-
-  try{
-
-    if(authMode === 'login'){
-
-      const { data, error } =
-        await supabaseClient.auth.signInWithPassword({
-          email,
-          password
-        });
-
-      if(error) throw error;
-
-      message.textContent =
-        '¡Inicio de sesión exitoso!';
-
-      setTimeout(() => {
-        closeModal();
-      }, 1200);
-
-    }else{
-
-      const name =
-        document.getElementById('authName').value.trim();
-
-      if(!name){
-        message.textContent =
-          'Escribe tu nombre.';
-        return;
-      }
-
-      const { data, error } =
-        await supabaseClient.auth.signUp({
-          email,
-          password,
-          options:{
-            data:{
-              name:name
-            }
-          }
-        });
-
-      if(error) throw error;
-
-      message.textContent =
-        'Cuenta creada. Revisa tu correo si Supabase solicita confirmación.';
-
-    }
-
-  }catch(error){
-
-    message.textContent =
-      'Error: ' + error.message;
-  }
-}
-
+places.forEach(p=>L.marker([p.lat,p.lng]).addTo(map).bindPopup(`<strong>✓ ${p.name}</strong><br>${p.desc}`));
 
 // =============================
 // COMPRA SIMULADA
 // =============================
-
-let selectedPlan = '';
-
 function openPurchase(plan){
-
-  selectedPlan = plan;
-
-  const title =
-    document.getElementById('purchaseTitle');
-
-  const price =
-    document.getElementById('purchasePrice');
-
-  if(plan === 'mensual'){
-
-    title.textContent =
-      'Patitas Mensual';
-
-    price.innerHTML =
-      '<strong>$20.000 / mes</strong>';
-
-  }else{
-
-    title.textContent =
-      'Patitas Anual';
-
-    price.innerHTML =
-      '<strong>$180.000 / año</strong>';
-  }
-
-  document.getElementById('purchaseModal')
-    .style.display = 'flex';
+  selectedPlan=plan;
+  document.getElementById('purchaseTitle').textContent=plan==='mensual'?'Patitas Mensual':'Patitas Anual';
+  document.getElementById('purchasePrice').innerHTML=plan==='mensual'?'<strong>$20.000 / mes</strong>':'<strong>$180.000 / año</strong>';
+  document.getElementById('purchaseModal').style.display='flex';
 }
-
-function closePurchase(){
-
-  document.getElementById('purchaseModal')
-    .style.display = 'none';
-}
-
+function closePurchase(){document.getElementById('purchaseModal').style.display='none';}
 function completePurchase(){
-
-  const plan =
-    document.getElementById('successPlan');
-
-  const price =
-    document.getElementById('successPrice');
-
-  const validity =
-    document.getElementById('successValidity');
-
-  const code =
-    document.getElementById('successCode');
-
-  const promo =
-    document.getElementById('successPromo');
-
-  if(selectedPlan === 'mensual'){
-
-    plan.textContent =
-      'Patitas Mensual';
-
-    price.textContent =
-      '$20.000 / mes';
-
-    validity.textContent =
-      '1 mes';
-
-    promo.textContent =
-      'Promoción: 1 mes gratis y posteriormente 2 meses con 50% de descuento.';
-
-  }else{
-
-    plan.textContent =
-      'Patitas Anual';
-
-    price.textContent =
-      '$180.000 / año';
-
-    validity.textContent =
-      '1 año';
-
-    promo.textContent =
-      'Precio promocional aplicado.';
-  }
-
-  code.textContent =
-    'PAT-' +
-    Math.random()
-      .toString(36)
-      .substring(2,8)
-      .toUpperCase();
-
+  document.getElementById('successPlan').textContent=selectedPlan==='mensual'?'Patitas Mensual':'Patitas Anual';
+  document.getElementById('successPrice').textContent=selectedPlan==='mensual'?'$20.000 / mes':'$180.000 / año';
+  document.getElementById('successValidity').textContent=selectedPlan==='mensual'?'1 mes':'1 año';
+  document.getElementById('successPromo').textContent=selectedPlan==='mensual'?'Promoción: 1 mes gratis y posteriormente 2 meses con 50% de descuento.':'Precio promocional aplicado.';
+  document.getElementById('successCode').textContent='PAT-'+Math.random().toString(36).substring(2,8).toUpperCase();
   closePurchase();
-
-  document.getElementById('successModal')
-    .style.display = 'flex';
+  document.getElementById('successModal').style.display='flex';
 }
+function closeSuccess(){document.getElementById('successModal').style.display='none';}
 
-function closeSuccess(){
-
-  document.getElementById('successModal')
-    .style.display = 'none';
-}
-
-
-// =============================
-// CERRAR MODALES AL HACER CLIC AFUERA
-// =============================
-
-window.addEventListener('click', function(event){
-
-  const loginModal =
-    document.getElementById('loginModal');
-
-  const purchaseModal =
-    document.getElementById('purchaseModal');
-
-  const successModal =
-    document.getElementById('successModal');
-
-  if(event.target === loginModal){
-    closeModal();
+supabaseClient.auth.onAuthStateChange((_event, session)=>{
+  updateHeader();
+  if(session && document.getElementById('accountModal').style.display==='flex'){
+    loadAccount();
   }
+});
 
-  if(event.target === purchaseModal){
-    closePurchase();
-  }
+window.addEventListener('load',async()=>{
+  await updateHeader();
+  setTimeout(()=>map.invalidateSize(),200);
+});
 
-  if(event.target === successModal){
-    closeSuccess();
-  }
+window.addEventListener('click',function(event){
+  const loginModal=document.getElementById('loginModal');
+  const accountModal=document.getElementById('accountModal');
+  const purchaseModal=document.getElementById('purchaseModal');
+  const successModal=document.getElementById('successModal');
 
+  if(event.target===loginModal) closeModal();
+  if(event.target===accountModal) closeAccount();
+  if(event.target===purchaseModal) closePurchase();
+  if(event.target===successModal) closeSuccess();
 });
 </script>
 
+
 </body>
 </html>
-  
